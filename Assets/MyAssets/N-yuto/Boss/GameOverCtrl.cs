@@ -20,7 +20,7 @@ public class GameOverCtrl : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player")
         {
-            Darken();
+            DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark,0.5f);
         }
         
     }
@@ -29,7 +29,7 @@ public class GameOverCtrl : MonoBehaviour {
     {
         MeshRenderer darkRenderer = darkness.GetComponent<MeshRenderer>();
 
-        darkRenderer.material.color = new Color(0f,0f,0f,0f);
+        darkRenderer.material.color = new Color(0f,0f,0f,1f);
 
     }
 
