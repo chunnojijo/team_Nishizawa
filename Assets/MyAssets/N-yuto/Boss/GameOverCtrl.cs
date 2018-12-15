@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameOverCtrl : MonoBehaviour {
 
-    [SerializeField]GameObject darkness;
+    [SerializeField] GameObject darkness;
+    [SerializeField] GameObject RespawnPoint;
 
 	// Use this for initialization
 	void Start () {
@@ -20,17 +21,22 @@ public class GameOverCtrl : MonoBehaviour {
     {
         if(other.gameObject.tag == "Player")
         {
-            DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark,0.5f);
+            StartCoroutine("GameOver",other.gameObject);
         }
         
     }
-
-    void Darken()
+    
+    private IEnumerator GameOver(GameObject player)
     {
-        MeshRenderer darkRenderer = darkness.GetComponent<MeshRenderer>();
 
-        darkRenderer.material.color = new Color(0f,0f,0f,1f);
+        DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark, 0.5f);
+        yield return new WaitForSeconds(1);
+        player.transform.position = RespawnPoint.transform.position;
+        yield return new WaitForSeconds(1);
+        DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
 
-    }
+    } 
+
+
 
 }
