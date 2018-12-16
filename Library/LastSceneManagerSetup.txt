@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/MyAssets/atago/Scenes/Interior1.unity
-  isLoaded: 1
-  isActive: 1
