@@ -6,3 +6,5 @@
 ただし、DLしたAssetは、MyAsset内ではなく、Assets直下に置きましょう。(見本でStandardAsset/ParticleSystem入れといた)
 
 あと何かあれば書き足しといて～
+
+branchはmasterから切りましょう笑
