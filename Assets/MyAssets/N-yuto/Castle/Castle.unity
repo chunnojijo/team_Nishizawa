@@ -5257,7 +5257,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GhostsParticles: {fileID: 1400907175}
-  alpha: 1
 --- !u!1 &1214733019
 GameObject:
   m_ObjectHideFlags: 0
