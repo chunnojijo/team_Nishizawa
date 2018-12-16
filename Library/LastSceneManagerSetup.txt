@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/MyAssets/msBRF65_UniRxtest/UniRx_test.unity
+- path: Assets/MyAssets/Chun/Ghost.unity
   isLoaded: 1
   isActive: 1
