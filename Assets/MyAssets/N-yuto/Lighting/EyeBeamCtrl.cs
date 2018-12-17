@@ -16,14 +16,14 @@ public class EyeBeamCtrl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown("p"))
+        if (Input.GetKeyDown("p"))   //ここ変更すればOK
         {
             ChangeColorMode();
         }
 		
 	}
 
-    void ChangeColorMode()
+    public void ChangeColorMode()
     {
         EyeBeamCtrl.ColorMode = (EyeBeamCtrl.ColorMode + 1) % 4;
 
@@ -34,7 +34,7 @@ public class EyeBeamCtrl : MonoBehaviour {
 
     }
 
-    void ChangeColorMode(int mode)
+    public void ChangeColorMode(int mode)
     {
         EyeBeamCtrl.ColorMode = mode;
 
