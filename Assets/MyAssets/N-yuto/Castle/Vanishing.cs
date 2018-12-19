@@ -6,6 +6,8 @@ public class Vanishing : MonoBehaviour {
 
     private MeshRenderer renderer;
     [SerializeField] private GameObject GhostsParticles;
+    [SerializeField] private GameObject SmokeParticles;
+
 
     private bool IsVanishing = false;
     [Range(0f,1f)] private float Rate = 1;
@@ -37,6 +39,8 @@ public class Vanishing : MonoBehaviour {
             }
 
             gameObject.transform.localScale = Rate * DefScale;
+            gameObject.transform.Rotate(0f,0f, 540f * Time.deltaTime);
+         //   GhostsParticles.transform.localScale = (1 - Rate) * new Vector3(1,1,1);
 
         }
 
@@ -51,7 +55,9 @@ public class Vanishing : MonoBehaviour {
     {
         IsVanishing = true;
         //renderer.enabled = false;
+       // GhostsParticles.transform.localScale = Vector3.zero;
         GhostsParticles.SetActive(true);
+        SmokeParticles.SetActive(true);
 
     }
 
