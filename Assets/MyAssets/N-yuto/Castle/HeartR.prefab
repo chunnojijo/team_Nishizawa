@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33037384882253958}
   - component: {fileID: 23192197218393736}
   m_Layer: 0
-  m_Name: Heart
+  m_Name: HeartR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f9ca2269f84828748b8b50b603448e53, type: 2}
+  - {fileID: 2100000, guid: d669ef370893a6e4a85a8bbfec280954, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
