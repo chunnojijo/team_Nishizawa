@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Vanishing : MonoBehaviour {
 
-    private MeshRenderer renderer;
+    //private MeshRenderer renderer;
     [SerializeField] private GameObject GhostsParticles;
     [SerializeField] private GameObject SmokeParticles;
+    [SerializeField] private GameObject MansionMesh;
+    [SerializeField] private GameObject Heart;
 
 
     private bool IsVanishing = false;
@@ -18,7 +20,7 @@ public class Vanishing : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        renderer = gameObject.GetComponent<MeshRenderer>();
+      //  renderer = gameObject.GetComponent<MeshRenderer>();
         DefScale = gameObject.transform.localScale;
         	
 	}
@@ -34,7 +36,9 @@ public class Vanishing : MonoBehaviour {
             if (Rate <= 0)
             {
                 Rate = 0f;
-                renderer.enabled = false;
+                //        renderer.enabled = false;
+                MansionMesh.SetActive(false);
+                Heart.SetActive(false);
                 IsVanishing = false;
             }
 
