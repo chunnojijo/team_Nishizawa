@@ -16,7 +16,9 @@ public class TextController : MonoBehaviour
     void Start()
     {
         all_serif = serif.text;
+        Debug.Log(all_serif);
         text = all_serif.Split('\n');
+        Debug.Log(text);
         Image = image.GetComponent<ImageController>();
     }
 
@@ -29,6 +31,7 @@ public class TextController : MonoBehaviour
     public void UI_Update()
     {
         i++;
+        Debug.Log(text[i]);
         if (i < text.Length - 1 && text[i] != text[0])//text[0]はpause、最後は空白
         {
             this.GetComponent<Text>().text = "";
