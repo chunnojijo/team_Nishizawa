@@ -221,7 +221,7 @@ GameObject:
   - component: {fileID: 5452028}
   m_Layer: 0
   m_Name: Circle
-  m_TagString: Untagged
+  m_TagString: Enemy1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -49357,6 +49357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2125964734}
   - component: {fileID: 2125964733}
+  - component: {fileID: 2125964735}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -49390,6 +49391,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2125964735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2125964732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e084a8f9b7ec9784f95364a5b987aa67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightpos: {fileID: 1990764231}
+  theta: 60
+  lightdistance: 200
+  Objects:
+  - {fileID: 893794549}
+  damagesc:
+  - {fileID: 5452026}
 --- !u!1 &2130410794
 GameObject:
   m_ObjectHideFlags: 0
