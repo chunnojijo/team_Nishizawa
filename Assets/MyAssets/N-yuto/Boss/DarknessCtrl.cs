@@ -36,16 +36,22 @@ public class DarknessCtrl : MonoBehaviour
 
         if (state == State.ChangeToDark)
         {
-            if (alpha != 1f) { alpha += deltaAlpha * Time.deltaTime; }
-            else { state = State.Stay; }
+            if (alpha < 1f) { alpha += deltaAlpha * Time.deltaTime; }
+            else {
+                state = State.Stay;
+                alpha = 1f;
+            }
             screenTexture.SetPixel(0, 0, new Color(0, 0, 0, alpha));
             screenTexture.Apply();
 
         }
         if (state == State.ChangeToClear)
         {
-            if (alpha != 0f) { alpha -= deltaAlpha * Time.deltaTime; }
-            else { state = State.Stay; }
+            if (alpha > 0f) { alpha -= deltaAlpha * Time.deltaTime; }
+            else {
+                state = State.Stay;
+                alpha = 0f;
+            }
             screenTexture.SetPixel(0, 0, new Color(0, 0, 0, alpha));
             screenTexture.Apply();
 
