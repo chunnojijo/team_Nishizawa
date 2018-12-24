@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GameOverCtrl : MonoBehaviour {
 
-    [SerializeField] GameObject darkness;
     [SerializeField] GameObject RespawnPoint;
 
 	// Use this for initialization
@@ -19,11 +18,13 @@ public class GameOverCtrl : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
+
         if(other.gameObject.tag == "Player")
         {
             StartCoroutine("GameOver",other.gameObject);
+
         }
-        
+
     }
     
     private IEnumerator GameOver(GameObject player)

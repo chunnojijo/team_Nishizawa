@@ -26,7 +26,7 @@ public class BossCtrl : MonoBehaviour {
 
     private IEnumerator BossEnumerator()
     {
-        anim.Play("appear");
+        //anim.Play("appear");
 
         yield return new WaitForSeconds(1);
 
