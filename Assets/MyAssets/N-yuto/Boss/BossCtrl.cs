@@ -6,8 +6,11 @@ public class BossCtrl : MonoBehaviour {
 
     float time = 30;
     [SerializeField] GameObject BossMesh;
+    [SerializeField] GameObject Kobake;
     [SerializeField] GameObject Cabinett;
+    [SerializeField] GameObject Player;
     Animation anim_boss;
+    Animation anim_kobake;
     Animator anim_cabinett;
 
     IEnumerator coroutine;
@@ -18,6 +21,7 @@ public class BossCtrl : MonoBehaviour {
         coroutine = BossEnumerator();
 
         anim_boss = BossMesh.GetComponent<Animation>();
+        anim_kobake = Kobake.GetComponent<Animation>();
         anim_cabinett = Cabinett.GetComponent<Animator>();
 
     }
@@ -36,6 +40,7 @@ public class BossCtrl : MonoBehaviour {
     private IEnumerator BossEnumerator()
     {
         anim_cabinett.Play("CabinettOpen");
+        anim_kobake.Play("kobakeBehaviour");
 
         yield return new WaitForSeconds(1.3f);
 
@@ -45,10 +50,16 @@ public class BossCtrl : MonoBehaviour {
 
         float t = 0;
 
-        while(true)
+        //while(t<=2)
+       // {
+        //   transform.localRotation = Quaternion.Euler(-90,0,Mathf.Sin(t * 0.3f * Mathf.PI) * 40);
+          //  t += Time.deltaTime;
+            //yield return null;
+        //}
+
+        while (true)
         {
-            BossMesh.transform.localRotation = Quaternion.Euler(-90,0,Mathf.Sin(t * Mathf.PI) * 40);
-            t += 0.3f * Time.deltaTime;
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(Player.transform.position - transform.position), Time.deltaTime * 15);
             yield return null;
         }
 

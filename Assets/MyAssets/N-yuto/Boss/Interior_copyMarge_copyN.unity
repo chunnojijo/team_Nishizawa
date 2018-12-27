@@ -7162,6 +7162,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224546052144493344, guid: 82df6dee4bc6be54396120384f5c2dcd,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82df6dee4bc6be54396120384f5c2dcd, type: 2}
   m_IsPrefabAsset: 0
@@ -16591,7 +16596,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1348665817}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -65.389, z: 0}
 --- !u!114 &552155972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39773,8 +39778,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.036139064, y: 0.06189095, z: 0.042834368}
-  m_Center: {x: 0, y: 0.03446324, z: 0}
+  m_Size: {x: 0.9337836, y: 3.2869802, z: 0.92916906}
+  m_Center: {x: 0.015014128, y: 0.61740255, z: -0.1761337}
 --- !u!114 &1315703228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39799,7 +39804,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BossMesh: {fileID: 846804360}
+  Kobake: {fileID: 1348665816}
   Cabinett: {fileID: 932021453}
+  Player: {fileID: 1896705667}
 --- !u!114 &1315703230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39851,7 +39858,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -40653,7 +40660,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1348665816}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.28, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1390443067}
@@ -40673,7 +40680,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: ebf5e2d7983136e4eb6edd69ce653a96, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!1 &1351013034
@@ -41559,7 +41566,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1348665817}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -65.389, z: 0}
 --- !u!136 &1390443068
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -47032,8 +47039,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1509348957}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.058, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 362826880}
@@ -55261,7 +55268,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1896705667}
   m_LocalRotation: {x: -0, y: 0.6807162, z: -0, w: 0.7325473}
-  m_LocalPosition: {x: -14.54, y: 1.058, z: -0.66}
+  m_LocalPosition: {x: -14.54, y: 0, z: -0.66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1509348961}
