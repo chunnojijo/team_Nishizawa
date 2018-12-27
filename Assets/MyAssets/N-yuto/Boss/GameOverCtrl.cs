@@ -47,17 +47,22 @@ public class GameOverCtrl : MonoBehaviour {
         player.transform.position = RespawnPoint.transform.position;
         iTween.Stop(transform.parent.gameObject);
         Debug.Log("1");
-        cabinett.transform.position = new Vector3(0f, -100f, 0f);
+       // cabinett.transform.position = new Vector3(0f, -100f, 0f);
         yield return new WaitForSeconds(1);
-        Debug.Log("11");
+      //  Debug.Log("11");
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
-        ChangePathName(CabinettPrefab);
-        Debug.Log("111");
-        newCabinett = Instantiate(CabinettPrefab,pos,rot);
-        Debug.Log("1111");
+       // ChangePathName(CabinettPrefab);
+        //Debug.Log("111");
+      //  newCabinett = Instantiate(CabinettPrefab,pos,rot);
+       // Debug.Log("1111");
         Destroy(cabinett);
 
-    } 
+    }
+
+    private void OnDestroy()
+    {
+        Instantiate(CabinettPrefab);
+    }
 
     void ChangePathName(GameObject cabinett)
     {
