@@ -4,10 +4,10 @@ using UnityEngine;
 using UniRx;
 
 public class GhostController : MonoBehaviour {
-    private Subject<string> ColorSubject = new Subject<string>();
+    //[SerializeField] private TimeCounter timeCounter;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
