@@ -108,7 +108,7 @@ public class Escape : MonoBehaviour {
     /// </summary>
     void Escapefromplayer()
     {
-        if (escape&&!damage)
+        if (escape&&!damage&&!apfirst)
         {
             //escapeに入ったとき最初だけ行う処理
             if (escapefirst)
@@ -238,7 +238,7 @@ public class Escape : MonoBehaviour {
 
 
     /// <summary>
-    /// やられたときの処理 appear=trueで出現、damage=trueでダメージを受ける　体力が0になるとdie=trueになり死亡時の処理を行う
+    /// やられたときと出現時の処理 appear=trueで出現、damage=trueでダメージを受ける　体力が0になるとdie=trueになり死亡時の処理を行う
     /// </summary>
     void Defeat()
     {
@@ -250,11 +250,16 @@ public class Escape : MonoBehaviour {
             if (transform.localScale.x <= 0)
             {
                 starparticle.Play();
+                damageparticle.Stop();
                 Destroy(this);
             }
             slider.gameObject.SetActive(false);
         }
 
+        if ((player.transform.position - parent.transform.position).magnitude < 5&&apfirst)
+        {
+            appear = true;
+        }
 
         if (appear)
         {
@@ -275,7 +280,7 @@ public class Escape : MonoBehaviour {
         }
 
 
-        if (damage)
+        if (damage&&!apfirst)
         {
             if (!damagefirst)
             {
