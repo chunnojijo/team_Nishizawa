@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class BossCtrl : MonoBehaviour {
 
-    float time = 30;
+    float time = 20;
     [SerializeField] GameObject BossMesh;
     [SerializeField] GameObject Kobake;
     [SerializeField] GameObject Cabinett;
     [SerializeField] GameObject Player;
+    [SerializeField] BossPathCtrl pathCtrl;
     Animation anim_boss;
     Animation anim_kobake;
     Animator anim_cabinett;
@@ -17,6 +18,10 @@ public class BossCtrl : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        if (!Player)
+        {
+            Player = GameObject.FindGameObjectWithTag("Player");
+        }
 
         coroutine = BossEnumerator();
 
@@ -32,6 +37,7 @@ public class BossCtrl : MonoBehaviour {
         if (Input.GetKeyDown("m"))
         {
             StartCoroutine(coroutine);
+            Invoke("GoPath",6f);
 
         }
     }
@@ -48,14 +54,14 @@ public class BossCtrl : MonoBehaviour {
 
         yield return new WaitForSeconds(1.5f);
 
-        float t = 0;
 
         //while(t<=2)
-       // {
+        // {
         //   transform.localRotation = Quaternion.Euler(-90,0,Mathf.Sin(t * 0.3f * Mathf.PI) * 40);
-          //  t += Time.deltaTime;
-            //yield return null;
+        //  t += Time.deltaTime;
+        //yield return null;
         //}
+
 
         while (true)
         {
@@ -63,7 +69,6 @@ public class BossCtrl : MonoBehaviour {
             yield return null;
         }
 
-        yield break;
 
         iTween.MoveTo(gameObject, iTween.Hash("path", iTweenPath.GetPath("BossPath1"),
                       "time", time, "easeType", iTween.EaseType.linear, "orienttopath", true));
@@ -74,6 +79,11 @@ public class BossCtrl : MonoBehaviour {
         yield return new WaitForSeconds(1);
        // DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
 
+    }
+
+    void GoPath()
+    {
+        pathCtrl.Go();
     }
 
 }
