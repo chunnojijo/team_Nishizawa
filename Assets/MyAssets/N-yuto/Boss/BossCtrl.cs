@@ -13,6 +13,7 @@ public class BossCtrl : MonoBehaviour {
     Animation anim_boss;
     Animation anim_kobake;
     Animator anim_cabinett;
+    AudioSource audio_boss;
 
     IEnumerator coroutine;
 
@@ -26,6 +27,7 @@ public class BossCtrl : MonoBehaviour {
         coroutine = BossEnumerator();
 
         anim_boss = BossMesh.GetComponent<Animation>();
+        audio_boss = BossMesh.GetComponent(AudioSource);
         anim_kobake = Kobake.GetComponent<Animation>();
         anim_cabinett = Cabinett.GetComponent<Animator>();
 
@@ -51,6 +53,7 @@ public class BossCtrl : MonoBehaviour {
         yield return new WaitForSeconds(1.3f);
 
         anim_boss.Play("appear_noRot");
+        audio_boss.Play();
 
         yield return new WaitForSeconds(1.5f);
 
@@ -84,6 +87,13 @@ public class BossCtrl : MonoBehaviour {
     void GoPath()
     {
         pathCtrl.Go();
+    }
+
+    public void CabStart()
+    {
+
+        StartCoroutine(coroutine);
+        Invoke("GoPath", 6f);
     }
 
 }
