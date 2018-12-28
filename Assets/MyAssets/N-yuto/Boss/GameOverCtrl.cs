@@ -59,10 +59,6 @@ public class GameOverCtrl : MonoBehaviour {
 
     }
 
-    private void OnDestroy()
-    {
-        Instantiate(CabinettPrefab);
-    }
 
     void ChangePathName(GameObject cabinett)
     {

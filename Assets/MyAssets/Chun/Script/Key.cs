@@ -56,7 +56,7 @@ public class Key : MonoBehaviour {
         /*time += Time.deltaTime;
         transform.position += new Vector3(0, floatwidth * (Mathf.Sin(time * floatspeed) - Mathf.Sin((time - Time.deltaTime) * floatspeed)), 0);*/
         //Debug.Log("Distance=" + (Player.transform.position - this.transform.position).magnitude);
-        if ((Player.transform.position - this.transform.position).magnitude < 0.5f&&timeafterapper>1.0f)
+        if ((Player.transform.position - this.transform.position).magnitude < 3.0f&&timeafterapper>1.0f)
         {
             getstatus = true;
             this.GetComponent<MeshRenderer>().enabled = false;

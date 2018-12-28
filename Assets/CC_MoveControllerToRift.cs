@@ -7,7 +7,7 @@ public class CC_MoveControllerToRift : MonoBehaviour
     public float Horizontal = 40f, Vertical = 40f, y_rotate = 0;
     Vector3 H_Vector = new Vector3(0f, -1f, 0f), V_Vector = new Vector3(-1f, 0f, 0f);
     public float speed = 3.0f;
-    public float rotateSpeed = 10.0f;
+    public float rotateSpeed = 90.0f;
     public float gravity = 10f;
     public float jumpPower = 5;
 

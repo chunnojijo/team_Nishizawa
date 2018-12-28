@@ -10,23 +10,58 @@ public class Vanishing : MonoBehaviour {
     [SerializeField] private GameObject MansionMesh;
     [SerializeField] private GameObject Heart;
 
+    [SerializeField] private Transform heartPos;
+    
 
     private bool IsVanishing = false;
+    private bool exists = true;
     [Range(0f,1f)] private float Rate = 1;
     [SerializeField] float TimeToFadeOut = 1f;
 
     private Vector3 DefScale;
+
+    bool canVanish = false;
+    
+    private RaycastHit hit;
+    private Ray ray;
+    float lightdistance = 500f;
+    [SerializeField] Transform player;
 
 
 	// Use this for initialization
 	void Start () {
       //  renderer = gameObject.GetComponent<MeshRenderer>();
         DefScale = gameObject.transform.localScale;
+        Invoke("Can", 3f);
         	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+
+        if (exists && canVanish)
+        {
+
+            ray = new Ray(player.position, heartPos.position - player.position);
+            if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(player.forward.normalized, ray.direction.normalized) > 0.94f))
+            {
+                Debug.Log("Find");
+
+                //damagesc[i].GetComponent<Escape>().damage = true;
+                if (hit.transform.tag == heartPos.tag)
+                {
+                    Vanish();
+                    exists = false;
+                    Debug.Log("Vanish");
+                }
+                /*lse
+                 {
+                     damagesc[i].GetComponent<Escape>().damage = false;
+                 }*/
+            }
+
+        }
+
 
         if (IsVanishing)
         {
@@ -55,14 +90,26 @@ public class Vanishing : MonoBehaviour {
 		
 	}
 
+    private void OnTriggerStay(Collider other)
+    {
+
+        if (exists && other.tag == "EYE") Vanish();
+    }
+
     void Vanish()
     {
         IsVanishing = true;
+        exists = false;
         //renderer.enabled = false;
        // GhostsParticles.transform.localScale = Vector3.zero;
         GhostsParticles.SetActive(true);
         SmokeParticles.SetActive(true);
 
+    }
+
+    void Can()
+    {
+        canVanish = true;
     }
 
 }
