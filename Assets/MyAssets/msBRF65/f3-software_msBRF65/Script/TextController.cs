@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TextController : MonoBehaviour
 {
     // Use this for initialization
-    string[] text;
+    public string[] text;
     string all_serif;
     public GameObject image;
     int i = 0;
@@ -31,18 +31,21 @@ public class TextController : MonoBehaviour
     public void UI_Update()
     {
         i++;
-        Debug.Log(text[i]);
-        if (i < text.Length - 1 && text[i] != text[0])//text[0]はpause、最後は空白
+        //Debug.Log(text[i]);
+        if (i < text.Length-1)
         {
-            this.GetComponent<Text>().text = "";
-            image.gameObject.SetActive(true);
-            StartCoroutine(Image.Action());
-            Invoke("WriteUI", (1 / Image.speed + Image.marge * 2) * Time.deltaTime + 0.1f);//関数の発生を遅らせる
-        }
-        else
-        {
-            image.gameObject.SetActive(false);
-            this.GetComponent<Text>().text = "";
+            if (text[i] != text[0])//text[0]はpause、最後は空白
+            {
+                this.GetComponent<Text>().text = "";
+                image.gameObject.SetActive(true);
+                StartCoroutine(Image.Action());
+                Invoke("WriteUI", (1 / Image.speed + Image.marge * 2) * Time.deltaTime + 0.1f);//関数の発生を遅らせる
+            }
+            else
+            {
+                image.gameObject.SetActive(false);
+                this.GetComponent<Text>().text = "";
+            }
         }
     }
 
@@ -56,6 +59,6 @@ public class TextController : MonoBehaviour
     void WriteUI()
     {
         this.GetComponent<Text>().text = text[i];
-
+    
     }
 }
