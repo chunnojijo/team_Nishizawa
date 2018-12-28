@@ -27,7 +27,7 @@ public class BossCtrl : MonoBehaviour {
         coroutine = BossEnumerator();
 
         anim_boss = BossMesh.GetComponent<Animation>();
-        audio_boss = BossMesh.GetComponent(AudioSource);
+        //audio_boss = BossMesh.GetComponent(AudioSource);
         anim_kobake = Kobake.GetComponent<Animation>();
         anim_cabinett = Cabinett.GetComponent<Animator>();
 
