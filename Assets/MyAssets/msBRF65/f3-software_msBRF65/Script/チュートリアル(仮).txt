@@ -6,3 +6,4 @@ pause
 以上です！！
 お疲れした！！！
 pause
+pause
