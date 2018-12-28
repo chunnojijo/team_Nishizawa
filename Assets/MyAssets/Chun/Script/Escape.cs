@@ -11,15 +11,19 @@ public class Escape : MonoBehaviour {
     public bool damage = false;
     public bool appear = false;
     public bool escape = false;
+    public bool escapeflag = true;
     public float maxEnemyHP = 3;
     public float escapetime = 1;
     public float Rotatemovespeed = 0.5f;
     public float movespeed = 0.1f;
     public float escapedistance = 5.0f;
+    public bool dieatall = false;
+    public GameObject Heart;
+    public GameObject changeObject;//変身元のオブジェクトを入れる　ない場合はNone
+    public Vector3 Object_finalscale=new Vector3(10.0f,10.0f,10.0f);
 
-
-    private bool die = false;
     private bool escapefirst = true;
+    private bool die = false;
     private bool apfirst = true;
     private bool damagefirst = false;
     private bool moveslide=true;
@@ -27,6 +31,8 @@ public class Escape : MonoBehaviour {
     private bool move = false;
     private bool aftermovefirst = false;
     private bool aftermove = false;
+    private bool escapefirstfinish = false;
+    private bool escapegoto=false;
     private int maxdirection;
     private LayerMask mask;
     private AudioSource[] audiosource;
@@ -39,6 +45,7 @@ public class Escape : MonoBehaviour {
     private float[] distancefromobj;
     private float distancefromobjmax=3;
     private float angle;
+    private Vector3 changeObject_firstscale;
     private GameObject parent;
     private GameObject[] particles;
     private Ray[] around;
@@ -58,14 +65,17 @@ public class Escape : MonoBehaviour {
         audiosource = this.GetComponents<AudioSource>();
         particlesystem = this.GetComponentsInChildren<ParticleSystem>();
         GetComponent<MeshRenderer>().enabled = false;
+        Heart.GetComponent<MeshRenderer>().enabled = false;
         slider.maxValue = maxEnemyHP;
         slider.gameObject.SetActive(false);
         enemyHP = maxEnemyHP;
         distancefromobj = new float[8];
         around = new Ray[8];
         parent = this.transform.root.gameObject;
+        Object_finalscale = new Vector3(10.0f, 10.0f, 10.0f);
     }
 	
+
 	// Update is called once per frame
 	void Update () {
         //For Debug
@@ -87,6 +97,7 @@ public class Escape : MonoBehaviour {
             //}
         }
 
+        
         //Debug.Log("player-ghost distance=" + (player.transform.root.gameObject.transform.TransformPoint(player.transform.position) - parent.transform.TransformPoint(this.transform.position)).magnitude);
         Escapefromplayer();
         moveFloat();
@@ -103,138 +114,6 @@ public class Escape : MonoBehaviour {
        
 	}
 
-    /// <summary>
-    /// プレイヤーから逃げる処理　escape=trueで逃げる処理が始まる
-    /// </summary>
-    void Escapefromplayer()
-    {
-        if (escape&&!damage&&!apfirst)
-        {
-            //escapeに入ったとき最初だけ行う処理
-            if (escapefirst)
-            {
-                around[0] = new Ray(this.transform.position, this.transform.forward * 1000);
-                around[1] = new Ray(this.transform.position, (this.transform.forward + this.transform.right) * 1000);
-                around[2] = new Ray(this.transform.position, this.transform.right * 1000);
-                around[3] = new Ray(this.transform.position, (-this.transform.forward + this.transform.right) * 1000);
-                around[4] = new Ray(this.transform.position, -this.transform.forward * 1000);
-                around[5] = new Ray(this.transform.position, (-this.transform.forward - this.transform.right) * 1000);
-                around[6] = new Ray(this.transform.position, -this.transform.right * 1000);
-                around[7] = new Ray(this.transform.position, (this.transform.forward - this.transform.right) * 1000);
-                escapefirst = false;
-                for (int i = 0; i < 8; i++)
-                {
-                    if (Physics.Raycast(around[i], out hit))
-                    {
-                        distancefromobj[i] = hit.distance;
-                        if (distancefromobjmax < distancefromobj[i])
-                        {
-                            if (Vector3.Dot(player.transform.forward.normalized, around[i].direction.normalized) > 0)
-                            {
-                                distancefromobjmax = distancefromobj[i];
-                                maxdirection = i;
-                                //Debug.Log("Dot=" + Vector3.Dot(player.transform.forward.normalized, around[i].direction.normalized));
-                                //Debug.Log("maxdirection=" + maxdirection);
-                            }
-                        }
-                    }
-                }
-                //maxdirectionとforwardがなす角度
-                angle = Vector3.Angle(this.transform.forward, around[maxdirection].direction) * (Vector3.Cross(this.transform.forward, around[maxdirection].direction).y < 0 ? -1 : 1);
-                //angle *= 180.0f;
-            }
-
-            //目的方向へ回転
-            Debug.DrawRay(around[maxdirection].origin, around[maxdirection].direction, Color.red);
-            if (rotationmove)
-            {
-                if (angle > 0)
-                {
-                    angle -= Rotatemovespeed;
-                    parent.transform.Rotate(new Vector3(0, Rotatemovespeed, 0));
-                    //Debug.Log("angle=" + angle);
-                }
-                if (angle <= 0)
-                {
-                    angle += Rotatemovespeed;
-                    parent.transform.Rotate(new Vector3(0, -Rotatemovespeed, 0));
-                    //Debug.Log("angle=" + angle);
-                }
-                if (angle < Rotatemovespeed * 2 && -Rotatemovespeed * 2 < angle)
-                {
-                    rotationmove = false;
-                    move = true;
-                }
-            }
-
-            //目的方向へ移動
-            if (move)
-            {
-                parent.transform.position += parent.transform.forward.normalized * movespeed;
-                distancefromobjmax -= movespeed;
-                if (distancefromobjmax < 0.5f)
-                {
-                    move = false;
-                    aftermovefirst = true;
-                    aftermove = true;
-                }
-            }
-
-            //動いた後プレイヤーの角度を計算
-
-            if (aftermove)
-            {
-                //動いた後プレイヤーの角度を計算
-                if (aftermovefirst)
-                {
-                    aftermovefirst = false;
-                    angle = Vector3.Angle(this.transform.forward, player.transform.position - this.transform.position) * (Vector3.Cross(this.transform.forward, player.transform.position - this.transform.position).y < 0 ? -1 : 1);
-                }
-
-                //プレイヤーの向きへ回転
-                if (angle > 0)
-                {
-                    angle -= Rotatemovespeed;
-                    parent.transform.Rotate(new Vector3(0, Rotatemovespeed, 0));
-                    //Debug.Log("angle=" + angle);
-                }
-                if (angle <= 0)
-                {
-                    angle += Rotatemovespeed;
-                    parent.transform.Rotate(new Vector3(0, -Rotatemovespeed, 0));
-                    //Debug.Log("angle=" + angle);
-                }
-                if (angle < Rotatemovespeed * 2 && -Rotatemovespeed * 2 < angle)
-                {
-                    aftermove = false;
-                    escape = false;
-                    audiosource[2].Play();
-                    escapefirst = true;
-                    aftermovefirst = true;
-                    rotationmove = true;
-                    maxdirection = 0;
-                }
-                
-            }
-
-        }
-        else
-        {
-            escapefirst = true;
-            aftermovefirst = true;
-            rotationmove = true;
-            maxdirection = 0;
-        }
-    }
-
-    /// <summary>
-    /// 上下にふわふわ浮く処理　moveslide=falseで止められる
-    /// </summary>
-    void moveFloat()
-    {
-        time += Time.deltaTime;
-        if (moveslide) transform.position += new Vector3(0, floatwidth * (Mathf.Sin(time * floatspeed) - Mathf.Sin((time - Time.deltaTime) * floatspeed)), 0);
-    }
 
 
     /// <summary>
@@ -251,17 +130,37 @@ public class Escape : MonoBehaviour {
             {
                 starparticle.Play();
                 damageparticle.Stop();
-                Destroy(this);
+                GetComponent<MeshRenderer>().enabled = false;
+                /*escape = false;
+                damage = false;
+                moveslide = false;
+                move = false;
+                aftermove = false;*/
+                die = false;
+                dieatall = true;
+                //Destroy(this);
             }
             slider.gameObject.SetActive(false);
         }
 
-        if ((player.transform.position - parent.transform.position).magnitude < 5&&apfirst)
+        //変身するものがない場合　出現判定
+        if ((player.transform.position - parent.transform.position).magnitude < 5 && apfirst && changeObject == null)
         {
             appear = true;
         }
 
-        if (appear)
+        //変身する者がある場合　出現判定
+        if (damage && apfirst && changeObject != null)
+        {
+            watchedtime += Time.deltaTime;
+            if (watchedtime > 1.0f)
+            {
+                appear = true;
+            }
+        }
+
+        //変身する者がない場合出現処理
+        if (appear && changeObject == null)
         {
             if (apfirst)
             {
@@ -270,6 +169,7 @@ public class Escape : MonoBehaviour {
                 audiosource[1].Play();
                 apfirst = false;
                 GetComponent<MeshRenderer>().enabled = true;
+                Heart.GetComponent<MeshRenderer>().enabled = true;
                 slider.gameObject.SetActive(true);
             }
             if (transform.localScale.x < 10) transform.localScale += new Vector3(Scalespeed, Scalespeed, Scalespeed);
@@ -278,14 +178,42 @@ public class Escape : MonoBehaviour {
                 appear = false;
             }
         }
+        //変身するものがある場合出現処理
+        if (appear && changeObject != null)
+        {
+            if (apfirst)
+            {
+                transform.localScale = new Vector3(0, 0, 0);
+                smokeparticle.Play();
+                audiosource[1].Play();
+                apfirst = false;
+                GetComponent<MeshRenderer>().enabled = true;
+                Heart.GetComponent<MeshRenderer>().enabled = true;
+                slider.gameObject.SetActive(true);
+                changeObject_firstscale = changeObject.transform.localScale;
+                Object_finalscale = this.transform.localScale;
+            }
+            if (transform.localScale.x < 10)
+            {
+                transform.localScale += new Vector3(Scalespeed, Scalespeed, Scalespeed);
+                //Debug.Log("Change!" + Object_finalscale.x);
+                changeObject.transform.localScale -= new Vector3(changeObject_firstscale.x / 10.0f * Scalespeed, changeObject_firstscale.y / 10.0f * Scalespeed, changeObject_firstscale.z / 10.0f * Scalespeed);
+            }
+            if (transform.localScale.x >= 10)
+            {
+                appear = false;
+                escapegoto = true;
+            }
+        }
 
-
-        if (damage&&!apfirst)
+        //左が変身する者がない場合、右が変身する者がある場合のダメージ判定　中身はダメージ処理
+        if ((damage && !apfirst && !dieatall && changeObject == null)||(damage && !apfirst && !dieatall && changeObject != null && escapefirstfinish))
         {
             if (!damagefirst)
             {
                 damageparticle.gameObject.SetActive(true);
                 damageparticle.Play();
+                Debug.Log("damage");
                 damagefirst = true;
             }
             enemyHP -= Time.deltaTime;
@@ -298,13 +226,158 @@ public class Escape : MonoBehaviour {
             damagefirst = false;
             moveslide = true;
         }
+        
 
-        if (enemyHP <= 0)
+        if (enemyHP <= 0 && !dieatall)
         {
             die = true;
             damage = false;
         }
     }
+
+
+
+
+    /// <summary>
+    /// プレイヤーから逃げる処理　escape=trueで逃げる処理が始まる
+    /// </summary>
+    void Escapefromplayer()
+    {
+        if (escapeflag)
+        {
+            if ((escape && !damage && !apfirst && !dieatall) || escapegoto)
+            {
+
+                //escapeに入ったとき最初だけ行う処理
+                if (escapefirst)
+                {
+                    around[0] = new Ray(this.transform.position, this.transform.forward * 1000);
+                    around[1] = new Ray(this.transform.position, (this.transform.forward + this.transform.right) * 1000);
+                    around[2] = new Ray(this.transform.position, this.transform.right * 1000);
+                    around[3] = new Ray(this.transform.position, (-this.transform.forward + this.transform.right) * 1000);
+                    around[4] = new Ray(this.transform.position, -this.transform.forward * 1000);
+                    around[5] = new Ray(this.transform.position, (-this.transform.forward - this.transform.right) * 1000);
+                    around[6] = new Ray(this.transform.position, -this.transform.right * 1000);
+                    around[7] = new Ray(this.transform.position, (this.transform.forward - this.transform.right) * 1000);
+                    escapefirst = false;
+                    for (int i = 0; i < 8; i++)
+                    {
+                        if (Physics.Raycast(around[i], out hit))
+                        {
+                            distancefromobj[i] = hit.distance;
+                            if (distancefromobjmax < distancefromobj[i])
+                            {
+                                if (Vector3.Dot(player.transform.forward.normalized, around[i].direction.normalized) > 0)
+                                {
+                                    distancefromobjmax = distancefromobj[i];
+                                    maxdirection = i;
+                                    //Debug.Log("Dot=" + Vector3.Dot(player.transform.forward.normalized, around[i].direction.normalized));
+                                    //Debug.Log("maxdirection=" + maxdirection);
+                                }
+                            }
+                        }
+                    }
+                    //maxdirectionとforwardがなす角度
+                    angle = Vector3.Angle(this.transform.forward, around[maxdirection].direction) * (Vector3.Cross(this.transform.forward, around[maxdirection].direction).y < 0 ? -1 : 1);
+                    //angle *= 180.0f;
+                }
+
+                //目的方向へ回転
+                Debug.DrawRay(around[maxdirection].origin, around[maxdirection].direction, Color.red);
+                if (rotationmove)
+                {
+                    if (angle > 0)
+                    {
+                        angle -= Rotatemovespeed;
+                        parent.transform.Rotate(new Vector3(0, Rotatemovespeed, 0));
+                        //Debug.Log("angle=" + angle);
+                    }
+                    if (angle <= 0)
+                    {
+                        angle += Rotatemovespeed;
+                        parent.transform.Rotate(new Vector3(0, -Rotatemovespeed, 0));
+                        //Debug.Log("angle=" + angle);
+                    }
+                    if (angle < Rotatemovespeed * 2 && -Rotatemovespeed * 2 < angle)
+                    {
+                        rotationmove = false;
+                        move = true;
+                    }
+                }
+
+                //目的方向へ移動
+                if (move)
+                {
+                    parent.transform.position += parent.transform.forward.normalized * movespeed;
+                    distancefromobjmax -= movespeed;
+                    if (distancefromobjmax < 0.5f)
+                    {
+                        move = false;
+                        aftermovefirst = true;
+                        aftermove = true;
+                    }
+                }
+
+                //動いた後プレイヤーの角度を計算
+
+                if (aftermove)
+                {
+                    //動いた後プレイヤーの角度を計算
+                    if (aftermovefirst)
+                    {
+                        aftermovefirst = false;
+                        angle = Vector3.Angle(this.transform.forward, player.transform.position - this.transform.position) * (Vector3.Cross(this.transform.forward, player.transform.position - this.transform.position).y < 0 ? -1 : 1);
+                    }
+
+                    //プレイヤーの向きへ回転
+                    if (angle > 0)
+                    {
+                        angle -= Rotatemovespeed;
+                        parent.transform.Rotate(new Vector3(0, Rotatemovespeed, 0));
+                        //Debug.Log("angle=" + angle);
+                    }
+                    if (angle <= 0)
+                    {
+                        angle += Rotatemovespeed;
+                        parent.transform.Rotate(new Vector3(0, -Rotatemovespeed, 0));
+                        //Debug.Log("angle=" + angle);
+                    }
+                    if (angle < Rotatemovespeed * 2 && -Rotatemovespeed * 2 < angle)
+                    {
+                        aftermove = false;
+                        escape = false;
+                        audiosource[2].Play();
+                        escapefirst = true;
+                        aftermovefirst = true;
+                        rotationmove = true;
+                        escapefirstfinish = true;
+                        escapegoto = false;
+                        maxdirection = 0;
+                    }
+
+                }
+
+            }
+            else
+            {
+                escapefirst = true;
+                aftermovefirst = true;
+                rotationmove = true;
+                maxdirection = 0;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 上下にふわふわ浮く処理　moveslide=falseで止められる
+    /// </summary>
+    void moveFloat()
+    {
+        time += Time.deltaTime;
+        if (moveslide) transform.position += new Vector3(0, floatwidth * (Mathf.Sin(time * floatspeed) - Mathf.Sin((time - Time.deltaTime) * floatspeed)), 0);
+    }
+
+    
 }
 
 
