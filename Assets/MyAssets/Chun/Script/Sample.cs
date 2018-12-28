@@ -8,6 +8,7 @@ public class Sample : MonoBehaviour {
     public float lightdistance=200.0f;
     public GameObject[] Objects;
     public GameObject[] damagesc;
+    public GameObject camerarig;
     
     private RaycastHit hit;
     private Ray ray;
@@ -41,8 +42,8 @@ public class Sample : MonoBehaviour {
 
         for(int i = 0; i < Objects.Length; i++)
         {
-            ray = new Ray(lightpos.position, Objects[i].transform.TransformPoint(damagesc[i].transform.localPosition)- lightpos.position);
-            if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(lightpos.forward.normalized, ray.direction.normalized) > 0.94f))
+            ray = new Ray(camerarig.transform.position, Objects[i].transform.TransformPoint(damagesc[i].transform.localPosition)- camerarig.transform.position);
+            if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(camerarig.transform.forward.normalized, ray.direction.normalized) > 0.94f))
             {
                 Debug.Log("Find");
 
