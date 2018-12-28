@@ -41,7 +41,7 @@ public class Sample : MonoBehaviour {
 
         for(int i = 0; i < Objects.Length; i++)
         {
-            ray = new Ray(lightpos.position, Objects[i].transform.position- lightpos.position);
+            ray = new Ray(lightpos.position, Objects[i].transform.TransformPoint(damagesc[i].transform.localPosition)- lightpos.position);
             if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(lightpos.forward.normalized, ray.direction.normalized) > 0.94f))
             {
                 Debug.Log("Find");
