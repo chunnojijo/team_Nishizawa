@@ -7,9 +7,13 @@ public class Navi : MonoBehaviour {
     public GameObject[] PerchObjects; //Perch:止まり木
 
     [SerializeField] NaviVoice VoiceScript;
+    [SerializeField] NaviSerif SerifScript;
 
-	// Use this for initialization
-	void Start () {
+    float MoveTime = 2f;
+    float SerifTime = 5f;
+
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -34,19 +38,61 @@ public class Navi : MonoBehaviour {
         }
 
 
+        if (Input.GetKeyDown("p"))
+        {
+            Say(0);
+        }
+        if (Input.GetKeyDown("o"))
+        {
+            Say("Good job!!");
+        }
+        if (Input.GetKeyDown("i"))
+        {
+            Say( "Random No. Is ... " + Random.value.ToString(),true);
+        }
+
+
     }
 
     public void GoTo(GameObject Target)
     {
-        iTween.MoveTo(this.gameObject, Target.transform.position, 2f);
+        iTween.MoveTo(this.gameObject, Target.transform.position, MoveTime);
         VoiceScript.Play(0);
     }
     public void GoTo(Vector3 WorldPosition)
     {
-        iTween.MoveTo(this.gameObject, WorldPosition, 2f);
+        iTween.MoveTo(this.gameObject, WorldPosition, MoveTime);
         VoiceScript.Play(0);
     }
 
+    public void Say(string serif, bool permanent = false)
+    {
+        if (permanent)
+        {
+            SerifScript.ChangeSerifText(serif);
+            VoiceScript.Play(1);
+        }
+        else
+        {
+            SerifScript.ChangeSerifText(serif, SerifTime);
+            VoiceScript.Play(1);
+        }
+
+    }
+    public void Say(int serifIndex, bool permanent = false)
+    {
+        if (permanent)
+        {
+            SerifScript.ChangeSerifText(serifIndex);
+            VoiceScript.Play(1);
+        }
+        else
+        {
+            SerifScript.ChangeSerifText(serifIndex, SerifTime);
+            VoiceScript.Play(1);
+        }
+
+    }
 
 
 }
