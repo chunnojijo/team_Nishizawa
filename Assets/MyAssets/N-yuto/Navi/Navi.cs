@@ -6,6 +6,8 @@ public class Navi : MonoBehaviour {
 
     public GameObject[] PerchObjects; //Perch:止まり木
 
+    [SerializeField] NaviVoice VoiceScript;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -36,11 +38,13 @@ public class Navi : MonoBehaviour {
 
     public void GoTo(GameObject Target)
     {
-        iTween.MoveTo(this.gameObject, Target.transform.position, 3f);
+        iTween.MoveTo(this.gameObject, Target.transform.position, 2f);
+        VoiceScript.Play(0);
     }
     public void GoTo(Vector3 WorldPosition)
     {
-
+        iTween.MoveTo(this.gameObject, WorldPosition, 2f);
+        VoiceScript.Play(0);
     }
 
 
