@@ -18,6 +18,8 @@ public class Navi : MonoBehaviour {
     [HideInInspector] public bool IsFollowingPlayer = false;
 
 
+    Coroutine hint;    
+
     // Use this for initialization
     void Start () {
 		
@@ -67,10 +69,12 @@ public class Navi : MonoBehaviour {
 
         if (Input.GetKeyDown("l"))
         {
-            Hint(2f, "", Vector3.back, true);
-
+            hint = Hint(2f, "ここが怪しいよ！", PerchObjects[1].transform.position);
         }
-
+        if (Input.GetKeyDown("k"))
+        {
+            StopHint(hint);
+        }
 
     }
 
@@ -78,13 +82,13 @@ public class Navi : MonoBehaviour {
     {
         iTween.MoveTo(this.gameObject, Target.transform.position, MoveTime);
         VoiceScript.Play(0);
-        gameObject.transform.parent = null;
+        IsFollowingPlayer = false;
     }
     public void GoTo(Vector3 WorldPosition)
     {
         iTween.MoveTo(this.gameObject, WorldPosition, MoveTime);
         VoiceScript.Play(0);
-        gameObject.transform.parent = null;
+        IsFollowingPlayer = false;
     }
 
     public void Say(string serif, bool permanent = false)
@@ -135,6 +139,11 @@ public class Navi : MonoBehaviour {
     }
     */
 
+    public void Shutup()
+    {
+        SerifScript.ClearText();
+    }
+
     public void Comeback()
     {
         IsFollowingPlayer = true; //MoveUpdateが発動
@@ -143,16 +152,27 @@ public class Navi : MonoBehaviour {
     }
 
 
-    public void Hint(float time, string serif, Vector3 position, bool done)
+    public Coroutine Hint(float time, string serif, Vector3 position)
     {
-        StartCoroutine("HintCoroutine",time);
-        //待ってくれない。
-        Debug.Log("HintDone");
-
+        return StartCoroutine(HintCoroutine(time, serif, position));
     } 
 
-    IEnumerator HintCoroutine(float time)
+    public void StopHint(Coroutine hint,bool shutup = true)
+    {
+        StopCoroutine(hint);
+        Debug.Log("Hintは実行されませんでした");
+        if (shutup) Shutup();
+    }
+
+    IEnumerator HintCoroutine(float time, string serif, Vector3 position)
     {
         yield return new WaitForSeconds(time);
+
+        Debug.Log("Hint!");
+        Say(serif,true);
+        yield return new WaitForSeconds(1f);
+        GoTo(position);
+
+        
     }
 }
