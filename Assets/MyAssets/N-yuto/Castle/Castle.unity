@@ -6534,33 +6534,23 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
       propertyPath: m_RootOrder
       value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 114633710476995314, guid: e164b64d86520a0459a913fc07d6b290,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114633710476995314, guid: e164b64d86520a0459a913fc07d6b290,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114661344191113376, guid: e164b64d86520a0459a913fc07d6b290,
         type: 2}
@@ -6572,16 +6562,14 @@ Prefab:
       propertyPath: playerSidePosition
       value: 
       objectReference: {fileID: 1847632921}
-    - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
-      propertyPath: m_LocalScale.x
+    - target: {fileID: 114633710476995314, guid: e164b64d86520a0459a913fc07d6b290,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
-      propertyPath: m_LocalScale.z
+    - target: {fileID: 114633710476995314, guid: e164b64d86520a0459a913fc07d6b290,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -63196,6 +63184,7 @@ MonoBehaviour:
   - "\u30AD\u30DF\u304C\uFF65\uFF65\uFF65"
   - "\u3053\u308C\u304C\uFF65\uFF65\uFF65"
   - "\u884C\u3053\u3046\uFF01\uFF01"
+  OP02_Serif: []
   navi: {fileID: 755261205}
 --- !u!4 &1194878727
 Transform:

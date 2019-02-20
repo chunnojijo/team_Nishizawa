@@ -25,6 +25,7 @@
 
 #Fonts
 *SDF.asset filter=lfs diff=lfs merge=lfs -text
+*mplus-1c-medium.asset filter=lfs diff=lfs merge=lfs -text
 
 #ETC
 *.a filter=lfs diff=lfs merge=lfs -text
