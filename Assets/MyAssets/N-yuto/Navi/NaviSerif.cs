@@ -5,18 +5,54 @@ using TMPro;
 
 public class NaviSerif : MonoBehaviour {
 
+    [SerializeField] Transform navi;
+    [SerializeField] Transform player;
+    [SerializeField] Transform canvas;
+
     [SerializeField] TextMeshProUGUI textMeshPro;
     public List<string> SerifList;
 
     float FadeSpeed = 3f;
+    Vector3 NaviToPlayer;
+    public float DefaultFontSize;
+    public float fontSizeCoefficcient = 0.12f;
+    float DeltaMagnitude;
+
+    /*
+    [SerializeField] bool Debug_IsBlue;
+    Vector3 ScreenPos;
+    RectTransform rectTransform;
+    */
+
 
     // Use this for initialization
     void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        //rectTransform = textMeshPro.GetComponent<RectTransform>();
+        DefaultFontSize = textMeshPro.fontSize;
+        NaviToPlayer = player.position - navi.position;
+    }
+
+    // Update is called once per frame
+    void Update () {
+
+        /*
+          if (Debug_IsBlue)
+          {
+              ScreenPos = Camera.main.WorldToScreenPoint(navi.position);
+              rectTransform.position = ScreenPos;
+          }
+          else
+          {
+
+          }
+        */
+
+        NaviToPlayer = player.position - navi.position;
+        DeltaMagnitude = NaviToPlayer.magnitude - 1f;
+        textMeshPro.fontSize =  DefaultFontSize + DeltaMagnitude * fontSizeCoefficcient ;
+        //Debug.Log(NaviToPlayer.magnitude);
+
+        canvas.forward = Camera.main.transform.forward;
 		
 	}
 

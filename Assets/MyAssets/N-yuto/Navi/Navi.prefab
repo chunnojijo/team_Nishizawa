@@ -73,14 +73,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1074904912076954}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -4.5, y: 1.71, z: 37.16}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.55, y: 0.77, z: -8.98}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 224077524035170002}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23419267067016954
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -385,6 +385,7 @@ MonoBehaviour:
   - {fileID: 0}
   VoiceScript: {fileID: 114827103450479692}
   SerifScript: {fileID: 114914992405276214}
+  IsFollowingPlayer: 0
 --- !u!114 &114827103450479692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -413,10 +414,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472561e6acd8c1240905e9866f86f66d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  navi: {fileID: 4358768137090930}
+  player: {fileID: 0}
+  canvas: {fileID: 224077524035170002}
   textMeshPro: {fileID: 114633710476995314}
   SerifList:
-  - Hello
-  - qerqe
+  - "\u65E5\u672C\u8A9E\u5165\u529B\u30C1\u30E3\u30EC\u30F3\u30B8\uFF01\uFF01"
+  - "\u3053\u3053\u306F\u3001\u3069\u3053\u3060\uFF65\uFF65\uFF65\uFF1F"
+  fontSizeCoefficcient: 0.12
 --- !u!135 &135058943354323376
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -454,7 +459,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!224 &224077524035170002
 RectTransform:
@@ -472,7 +477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.65}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224590580993566766
@@ -490,6 +495,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.15}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 0.33}
   m_Pivot: {x: 0.5, y: 0.5}

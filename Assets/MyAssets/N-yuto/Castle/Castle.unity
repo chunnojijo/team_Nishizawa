@@ -8774,12 +8774,12 @@ Prefab:
     - target: {fileID: 114633710476995314, guid: e164b64d86520a0459a913fc07d6b290,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114633710476995314, guid: e164b64d86520a0459a913fc07d6b290,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114633710476995314, guid: e164b64d86520a0459a913fc07d6b290,
         type: 2}
@@ -8813,9 +8813,46 @@ Prefab:
       propertyPath: m_textInfo.spaceCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114914992405276214, guid: e164b64d86520a0459a913fc07d6b290,
+        type: 2}
+      propertyPath: navi
+      value: 
+      objectReference: {fileID: 922674447}
+    - target: {fileID: 114914992405276214, guid: e164b64d86520a0459a913fc07d6b290,
+        type: 2}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 677276532}
+    - target: {fileID: 114914992405276214, guid: e164b64d86520a0459a913fc07d6b290,
+        type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 280985433}
+    - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4358768137090930, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114914992405276214, guid: e164b64d86520a0459a913fc07d6b290,
+        type: 2}
+      propertyPath: fontSizeCoefficcient
+      value: 0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e164b64d86520a0459a913fc07d6b290, type: 2}
   m_IsPrefabAsset: 0
+--- !u!224 &280985433 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 224077524035170002, guid: e164b64d86520a0459a913fc07d6b290,
+    type: 2}
+  m_PrefabInternal: {fileID: 280985432}
 --- !u!1001 &291470339
 Prefab:
   m_ObjectHideFlags: 0
