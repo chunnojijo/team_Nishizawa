@@ -24,7 +24,7 @@ public class Vanishing : MonoBehaviour {
     
     private RaycastHit hit;
     private Ray ray;
-    float lightdistance = 500f;
+    [SerializeField] float lightdistance = 50f;
     [SerializeField] Transform player;
 
 
