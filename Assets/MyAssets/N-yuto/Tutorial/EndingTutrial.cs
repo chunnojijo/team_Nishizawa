@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OpeningTutrial : MonoBehaviour {
+public class EndingTutrial : MonoBehaviour {
 
-    [SerializeField] string[] OP01_Serif;
-    [SerializeField] string[] OP02_Serif;
+    [SerializeField] string[] ED01_Serif;
+    [SerializeField] string[] ED02_Serif;
     [SerializeField] Navi navi;
     
 	// Use this for initialization
@@ -15,49 +15,47 @@ public class OpeningTutrial : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (Input.GetKeyDown("m")) { StartCoroutine(OP01()); }
 		
 	}
 
 
-    public IEnumerator OP01()
+    public IEnumerator ED01()
     {
         navi.Comeback();
 
         yield return new WaitForSeconds(0.5f);
 
-        navi.Say(OP01_Serif[0]);
+        navi.Say(ED01_Serif[0]);
 
         yield return new WaitForSeconds(2f);
 
-        navi.Say(OP01_Serif[1]);
+        navi.Say(ED01_Serif[1]);
 
         yield return new WaitForSeconds(2f);
 
-        navi.Say(OP01_Serif[2]);
+        navi.Say(ED01_Serif[2]);
 
         yield return new WaitForSeconds(2f);
 
         Debug.Log("操作方法：");
     }
 
-    public IEnumerator OP02()
+    public IEnumerator ED02()
     {
         navi.Comeback();
 
         yield return new WaitForSeconds(0.5f);
 
-        navi.Say(OP02_Serif[0]);
+        navi.Say(ED02_Serif[0]);
 
         yield return new WaitForSeconds(2f);
 
-        navi.Say(OP02_Serif[1]);
-        //navi.keyDrop();
+        navi.Say(ED02_Serif[1]);
+        //navi.keyDrED();
 
         yield return new WaitForSeconds(2f);
 
-        navi.Say(OP02_Serif[2]);
+        navi.Say(ED02_Serif[2]);
 
         yield return new WaitForSeconds(2f);
 

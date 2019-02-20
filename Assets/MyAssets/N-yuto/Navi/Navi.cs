@@ -148,7 +148,10 @@ public class Navi : MonoBehaviour {
     {
         IsFollowingPlayer = true; //MoveUpdateが発動
         VoiceScript.Play(0);
-
+    }
+    public void ComebackSilently()
+    {
+        IsFollowingPlayer = true; //MoveUpdateが発動
     }
 
 
