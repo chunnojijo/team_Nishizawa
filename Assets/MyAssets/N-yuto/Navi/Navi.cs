@@ -66,6 +66,14 @@ public class Navi : MonoBehaviour {
             Say( "Random No. Is ... " + Random.value.ToString(),true);
         }
 
+        if (Input.GetKeyDown("u"))
+        {
+            Comeback();
+        }
+        if (Input.GetKeyDown("j"))
+        {
+            DontFollowMe();
+        }
 
         if (Input.GetKeyDown("l"))
         {
@@ -154,6 +162,10 @@ public class Navi : MonoBehaviour {
         IsFollowingPlayer = true; //MoveUpdateが発動
     }
 
+    public void DontFollowMe()
+    {
+        IsFollowingPlayer = false;
+    }
 
     public Coroutine Hint(float time, string serif, Vector3 position)
     {
