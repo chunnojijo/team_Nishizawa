@@ -15,6 +15,9 @@ public class Navi : MonoBehaviour {
     float MoveTime = 2f;
     float SerifTime = 5f;
 
+    [HideInInspector] public bool IsFollowingPlayer = false;
+
+
     // Use this for initialization
     void Start () {
 		
@@ -23,6 +26,13 @@ public class Navi : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (IsFollowingPlayer)
+        {
+            iTween.MoveUpdate(gameObject, playerSidePosition.transform.position, 4f);
+        }
+
+
+     //以降デバッグ用
         if (Input.GetKeyDown("0"))
         {
             if (PerchObjects.Length > 0) GoTo(PerchObjects[0]);
@@ -127,9 +137,8 @@ public class Navi : MonoBehaviour {
 
     public void Comeback()
     {
-        gameObject.transform.parent = Player.transform;
-        iTween.MoveTo(gameObject, playerSidePosition.transform.position, MoveTime);
-        //要修正：
+        IsFollowingPlayer = true; //MoveUpdateが発動
+        VoiceScript.Play(0);
 
     }
 
