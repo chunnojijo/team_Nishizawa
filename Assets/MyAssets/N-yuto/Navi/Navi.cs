@@ -5,7 +5,9 @@ using UnityEngine;
 public class Navi : MonoBehaviour {
 
     public GameObject Player;
+    [SerializeField] GameObject Key;
 
+    public GameObject KeyDropPosition;
     public GameObject playerSidePosition;
     public GameObject[] PerchObjects; //Perch:止まり木
 
@@ -17,16 +19,20 @@ public class Navi : MonoBehaviour {
 
     [HideInInspector] public bool IsFollowingPlayer = false;
 
+    float DropSpeed = 4f;
+    
+    Coroutine hint;
 
-    Coroutine hint;    
+    Rigidbody KeyRb;
 
     // Use this for initialization
     void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        KeyRb = Key.GetComponent<Rigidbody>();
+
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if (IsFollowingPlayer)
         {
@@ -82,6 +88,11 @@ public class Navi : MonoBehaviour {
         if (Input.GetKeyDown("k"))
         {
             StopHint(hint);
+        }
+
+        if (Input.GetKeyDown("n"))
+        {
+            DropKey();
         }
 
     }
@@ -165,6 +176,13 @@ public class Navi : MonoBehaviour {
     public void DontFollowMe()
     {
         IsFollowingPlayer = false;
+    }
+
+    public void DropKey()
+    {
+        Key.SetActive(true);
+        KeyRb.position = gameObject.transform.position;
+        KeyRb.velocity = ( Vector3.up + gameObject.transform.forward ) * DropSpeed;
     }
 
     public Coroutine Hint(float time, string serif, Vector3 position)
