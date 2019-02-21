@@ -7,7 +7,7 @@ public class Navi : MonoBehaviour {
     public GameObject Player;
     [SerializeField] GameObject Key;
 
-    public GameObject KeyDropPosition;
+    [SerializeField] GameObject KeyDropPosition;
     public GameObject playerSidePosition;
     public GameObject[] PerchObjects; //Perch:止まり木
 
@@ -182,7 +182,7 @@ public class Navi : MonoBehaviour {
     {
         Key.SetActive(true);
         KeyRb.position = gameObject.transform.position;
-        KeyRb.velocity = ( Vector3.up + gameObject.transform.forward ) * DropSpeed;
+        KeyRb.velocity = ( Vector3.up + KeyDropPosition.transform.position - gameObject.transform.position ) * DropSpeed;
     }
 
     public Coroutine Hint(float time, string serif, Vector3 position)

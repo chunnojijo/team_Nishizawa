@@ -11,7 +11,7 @@ public class OutSideSwich : MonoBehaviour {
     [SerializeField] EndingTutrial endingEvent;
 
     [SerializeField] Transform player;
-    [SerializeField] Transform navi;
+    [SerializeField] Navi navi;
 
     [SerializeField] Transform OP_CamPos;
     [SerializeField] Transform Inside_CamPos;
@@ -59,6 +59,7 @@ public class OutSideSwich : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
+        navi.Shutup();
         ON_OpeningMode.Invoke();
 
         yield return null;
@@ -68,8 +69,8 @@ public class OutSideSwich : MonoBehaviour {
 
         yield return null;
 
-        navi.position = OP_NaviPos.position;
-        navi.rotation = OP_NaviPos.rotation;
+        navi.transform.position = OP_NaviPos.position;
+        navi.transform.rotation = OP_NaviPos.rotation;
 
         yield return new WaitForSeconds(1f);
 
@@ -92,11 +93,12 @@ public class OutSideSwich : MonoBehaviour {
 
         yield return null;
 
-        navi.position = Inside_NaviPos.position;
-        navi.rotation = Inside_NaviPos.rotation;
+        navi.transform.position = Inside_NaviPos.position;
+        navi.transform.rotation = Inside_NaviPos.rotation;
 
         yield return null;
 
+        navi.Shutup();
         OFF.Invoke();
 
         yield return new WaitForSeconds(1f);
@@ -112,6 +114,7 @@ public class OutSideSwich : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
+        navi.Shutup();
         ON_EndingMode.Invoke();
 
         yield return null;
@@ -121,8 +124,8 @@ public class OutSideSwich : MonoBehaviour {
 
         yield return null;
 
-        navi.position = ED_NaviPos.position;
-        navi.rotation = ED_NaviPos.rotation;
+        navi.transform.position = ED_NaviPos.position;
+        navi.transform.rotation = ED_NaviPos.rotation;
 
         yield return new WaitForSeconds(1f);
 
