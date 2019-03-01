@@ -17,7 +17,7 @@ public class DarknessCtrl : MonoBehaviour
     {
         // 1pixel のTexture2D.
         screenTexture = new Texture2D(1, 1, TextureFormat.ARGB32, false);
-        // 黒のアルファ0.5で薄暗い感じにする.
+        // 色初期化.
         screenTexture.SetPixel(0, 0, new Color(0, 0, 0, alpha));
         // これをしないと色が適用されない.
         screenTexture.Apply();
