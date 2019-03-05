@@ -16,6 +16,7 @@ public class OutSideSwich : MonoBehaviour {
     [SerializeField] Transform OP_CamPos;
     [SerializeField] Transform Inside_CamPos;
     [SerializeField] Transform ED_CamPos;
+    [SerializeField] Transform Title_CamPos;
 
     [SerializeField] Transform OP_NaviPos;
     [SerializeField] Transform Inside_NaviPos;
@@ -27,6 +28,7 @@ public class OutSideSwich : MonoBehaviour {
     public UnityEvent ON_OpeningMode;
     public UnityEvent ON_EndingMode;
     public UnityEvent OFF;
+    public UnityEvent OFF_TitleMode;
 
 
     // Use this for initialization
@@ -48,6 +50,10 @@ public class OutSideSwich : MonoBehaviour {
         if (Input.GetKeyDown("e") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
             StartCoroutine(Ending());
+        }
+        if (Input.GetKeyDown("t") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
+        {
+            StartCoroutine(Title());
         }
 
     }
@@ -136,4 +142,26 @@ public class OutSideSwich : MonoBehaviour {
         StartCoroutine(endingEvent.ED01());
     }
 
+    public IEnumerator Title()
+    {
+        DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark, 0.5f);
+
+        navi.DontFollowMe();
+
+        yield return new WaitForSeconds(1f);
+
+        player.position = Title_CamPos.position;
+        player.rotation = Title_CamPos.rotation;
+
+        yield return null;
+
+        navi.Shutup();
+        OFF_TitleMode.Invoke();
+
+        yield return new WaitForSeconds(1f);
+
+        DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
+
+        yield return new WaitForSeconds(1f);
+    }
 }

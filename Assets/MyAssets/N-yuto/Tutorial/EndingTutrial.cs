@@ -85,6 +85,7 @@ public class EndingTutrial : MonoBehaviour {
         yield return new WaitForSeconds(2f);
 
         navi.Comeback();
+        navi.LookMe();
 
         yield return new WaitForSeconds(2f);
 
@@ -96,15 +97,12 @@ public class EndingTutrial : MonoBehaviour {
 
         yield return new WaitForSeconds(2f);
 
-        //LookAt(sun);
-
-        yield return new WaitForSeconds(3f);
-
+        navi.LookAt(Sun.gameObject);
         navi.Say(ED02_Serif[2]);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(6f);
 
-        //LookMe();
+        navi.LookMe();
         navi.Say(ED02_Serif[3]);
 
         yield return new WaitForSeconds(3f);
