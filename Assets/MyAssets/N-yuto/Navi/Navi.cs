@@ -25,14 +25,21 @@ public class Navi : MonoBehaviour {
 
     Rigidbody KeyRb;
 
+    Vector3 prePos;
+    Vector3 Pos;
+    Vector3 Velocity;
+    bool IsLooking = false;
+    GameObject LookObj;
+
     // Use this for initialization
     void Start () {
         KeyRb = Key.GetComponent<Rigidbody>();
-
+        prePos = gameObject.transform.position;
     }
 
     // Update is called once per frame
     void Update () {
+        
 
         if (IsFollowingPlayer)
         {
@@ -94,6 +101,25 @@ public class Navi : MonoBehaviour {
         {
             DropKey();
         }
+
+
+        if (!IsLooking)
+        {
+            Pos = gameObject.transform.position;
+            Velocity = Pos - prePos;
+            Velocity.y = 0f;
+            if (Velocity.sqrMagnitude >= 0.1f)
+            {
+                iTween.LookUpdate(gameObject, Pos + Velocity, 3f);
+            }
+            prePos = Pos;
+        }
+        else//IsLooking
+        {
+            iTween.LookUpdate(gameObject, LookObj.transform.position, 3f);
+        }
+
+        SerifScript.UpdateSerifTransform();
 
     }
 
@@ -176,6 +202,23 @@ public class Navi : MonoBehaviour {
     public void DontFollowMe()
     {
         IsFollowingPlayer = false;
+    }
+
+    public void LookAt(GameObject gameobject)
+    {
+        IsLooking = true;
+        LookObj = gameobject;
+    }
+    public void LookMe()
+    {
+        IsLooking = true;
+        LookPos = Player.transform.position;
+    }
+
+    public void DontLookAt()
+    {
+        IsLooking = false;
+        prePos = gameObject.transform.position;
     }
 
     public void DropKey()
