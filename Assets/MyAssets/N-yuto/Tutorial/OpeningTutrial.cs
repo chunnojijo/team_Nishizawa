@@ -12,9 +12,10 @@ public class OpeningTutrial : MonoBehaviour {
     [SerializeField] GameObject[] OP02_Position;
 
     bool OP02_Can_Start = false;
+    [SerializeField] GameObject KeyDropPos;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -34,6 +35,7 @@ public class OpeningTutrial : MonoBehaviour {
     public IEnumerator OP01()
     {
         navi.Comeback();
+        navi.LookMe();
 
         yield return new WaitForSeconds(0.5f);
 
@@ -49,6 +51,7 @@ public class OpeningTutrial : MonoBehaviour {
 
         yield return new WaitForSeconds(2f);
 
+        navi.DontLookAt();
         Debug.Log("操作方法：");
 
         while (!OP02_Can_Start)
@@ -78,7 +81,11 @@ public class OpeningTutrial : MonoBehaviour {
 
         navi.GoTo(OP02_Position[1]);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+
+        navi.LookAt(KeyDropPos);
+
+        yield return new WaitForSeconds(2f);
 
         navi.Say(OP02_Serif[2]);
 
@@ -89,6 +96,7 @@ public class OpeningTutrial : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         navi.Say(OP02_Serif[3],true);
+        navi.DontLookAt();
 
         yield return new WaitForSeconds(0.5f);
 

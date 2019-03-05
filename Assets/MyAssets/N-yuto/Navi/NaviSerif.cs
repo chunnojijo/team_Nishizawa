@@ -47,14 +47,18 @@ public class NaviSerif : MonoBehaviour {
           }
         */
 
+		
+	}
+
+    public void UpdateSerifTransform()//Navi.csからUpdate毎に呼び出す
+    {
         NaviToPlayer = player.position - navi.position;
         DeltaMagnitude = NaviToPlayer.magnitude - 1f;
-        textMeshPro.fontSize =  DefaultFontSize + DeltaMagnitude * fontSizeCoefficcient ;
+        textMeshPro.fontSize = DefaultFontSize + DeltaMagnitude * fontSizeCoefficcient;
         //Debug.Log(NaviToPlayer.magnitude);
 
         canvas.forward = Camera.main.transform.forward;
-		
-	}
+    }
 
     public void ChangeSerifText(int SerifNumber)
     {
