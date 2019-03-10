@@ -5,8 +5,8 @@ using UnityEngine;
 public class CC_MoveController : MonoBehaviour {
     public float Horizontal = 40f, Vertical = 40f, y_rotate = 0;
     Vector3 H_Vector = new Vector3(0f, -1f, 0f), V_Vector = new Vector3(-1f, 0f, 0f);
-    public float speed = 3.0f;
-    public float rotateSpeed = 10.0f;
+    public float speed = 20.0f;
+    public float rotateSpeed = 20.0f;
     public float gravity = 10f;
     public float jumpPower = 5;
 
@@ -46,19 +46,19 @@ public class CC_MoveController : MonoBehaviour {
             }
             if (Input.GetKey("up"))
             {
-                moveDirection = transform.transform.forward * speed;
+                moveDirection = transform.transform.forward * speed * Time.deltaTime;
             }
             else if (Input.GetKey("down"))
             {
-                moveDirection = -transform.transform.forward * speed;
+                moveDirection = -transform.transform.forward * speed *Time.deltaTime;
             }
             else if (Input.GetKey("right"))
             {
-                moveDirection = Quaternion.Euler(0f, 90f, 0f) * transform.transform.forward * speed;
+                moveDirection = Quaternion.Euler(0f, 90f, 0f) * transform.transform.forward * speed * Time.deltaTime;
             }
             else if (Input.GetKey("left"))
             {
-                moveDirection = Quaternion.Euler(0f, -90f, 0f) * transform.transform.forward * speed;
+                moveDirection = Quaternion.Euler(0f, -90f, 0f) * transform.transform.forward * speed * Time.deltaTime;
             }
             else
             {
