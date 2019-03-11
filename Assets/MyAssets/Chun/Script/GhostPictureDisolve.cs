@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class GhostPictureDisolve : MonoBehaviour {
 
+    public GameObject Torche;
     private float time = 0;
-    private bool disolve = false;
+    public bool disolve = false;
+    public bool dissolvefinish = false;
     private Renderer _renderer;
 
     // Use this for initialization
@@ -22,13 +24,15 @@ public class GhostPictureDisolve : MonoBehaviour {
 
         if (disolve)
         {
-            _renderer.material.EnableKeyword("_Threshold");
+            time += Time.deltaTime;
+            _renderer.material.SetFloat("_Threshold", (time -2)*0.3f);
+            if ((time - 2) * 0.3f > 1) dissolvefinish = true;
         }
 	}
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Torch")
+        if (other.tag == "Torch"&&Torche.GetComponent<Torchelight>().IntensityLight>0)
         {
             time += Time.deltaTime;
         }

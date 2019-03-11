@@ -52,9 +52,10 @@ public class DoorOpen : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "key")
+        if (other.tag == "Key")
         {
             open = true;
+            Destroy(other);
         }
     }
 }
