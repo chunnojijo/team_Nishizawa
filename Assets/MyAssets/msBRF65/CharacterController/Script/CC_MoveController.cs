@@ -44,26 +44,25 @@ public class CC_MoveController : MonoBehaviour {
             {
                 this.transform.Rotate(-V_Vector * Vertical * Time.deltaTime);
             }
+
+            moveDirection = Vector3.zero;
             if (Input.GetKey("up"))
             {
-                moveDirection = transform.transform.forward * speed * Time.deltaTime;
+                moveDirection += transform.transform.forward * speed * Time.deltaTime;
             }
-            else if (Input.GetKey("down"))
+            if (Input.GetKey("down"))
             {
-                moveDirection = -transform.transform.forward * speed *Time.deltaTime;
+                moveDirection += -transform.transform.forward * speed *Time.deltaTime;
             }
-            else if (Input.GetKey("right"))
+            if (Input.GetKey("right"))
             {
-                moveDirection = Quaternion.Euler(0f, 90f, 0f) * transform.transform.forward * speed * Time.deltaTime;
+                moveDirection += Quaternion.Euler(0f, 90f, 0f) * transform.transform.forward * speed * Time.deltaTime;
             }
-            else if (Input.GetKey("left"))
+            if (Input.GetKey("left"))
             {
-                moveDirection = Quaternion.Euler(0f, -90f, 0f) * transform.transform.forward * speed * Time.deltaTime;
+                moveDirection += Quaternion.Euler(0f, -90f, 0f) * transform.transform.forward * speed * Time.deltaTime;
             }
-            else
-            {
-                moveDirection = Vector3.zero;
-            }
+            
             if (Input.GetKey("space"))
             {
                 moveDirection.y = jumpPower;
