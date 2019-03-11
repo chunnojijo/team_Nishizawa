@@ -29,7 +29,6 @@ public class DoorOpen : MonoBehaviour
         }*/
         if (Input.GetKeyDown(KeyCode.Space))
         {
-
             open = true;
         }
         if (open)
