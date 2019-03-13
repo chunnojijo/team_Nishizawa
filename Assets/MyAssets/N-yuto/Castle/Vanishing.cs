@@ -25,7 +25,7 @@ public class Vanishing : MonoBehaviour {
     private RaycastHit hit;
     private Ray ray;
     [SerializeField] float lightdistance = 50f;
-    [SerializeField] Transform player;
+    [SerializeField] Transform light;
 
     bool IsDamaging = false;
     float HP = 5f;
@@ -49,8 +49,8 @@ public class Vanishing : MonoBehaviour {
         if (exists && canVanish)
         {
 
-            ray = new Ray(player.position, heartPos.position - player.position);
-            if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(player.forward.normalized, ray.direction.normalized) > 0.9f))
+            ray = new Ray(light.position, heartPos.position - light.position);
+            if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(light.forward.normalized, ray.direction.normalized) > 0.9f))
             {
                 Debug.Log("Find");
 
