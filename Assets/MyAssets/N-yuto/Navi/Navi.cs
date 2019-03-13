@@ -29,7 +29,9 @@ public class Navi : MonoBehaviour {
     Vector3 Pos;
     Vector3 Velocity;
     bool IsLooking = false;
+    bool FollowLookingObj = false;
     GameObject LookObj;
+    Vector3 LookPos;
 
     // Use this for initialization
     void Start () {
@@ -116,7 +118,8 @@ public class Navi : MonoBehaviour {
         }
         else//IsLooking
         {
-            iTween.LookUpdate(gameObject, LookObj.transform.position, 3f);
+            if (FollowLookingObj) { LookPos = LookObj.transform.position; }
+            iTween.LookUpdate(gameObject,LookPos,5f);
         }
 
         SerifScript.UpdateSerifTransform();
@@ -207,11 +210,13 @@ public class Navi : MonoBehaviour {
     public void LookAt(GameObject gameobject)
     {
         IsLooking = true;
+        FollowLookingObj = true;
         LookObj = gameobject;
     }
     public void LookMe()
     {
         IsLooking = true;
+        FollowLookingObj = false;
         LookPos = Player.transform.position;
     }
 
