@@ -79,9 +79,8 @@ public class NaviManager : MonoBehaviour {
         navi.Say("あの紙に何か書いてあるね");
        yield return new WaitForSeconds(3.0f);
         navi.GoTo(paper.transform.position+new Vector3(-1.5f,0,0));
-        yield return new WaitForSeconds(2.0f);
-        navi.Say("やっほー",true);
-        yield return null;
+        yield return new WaitForSeconds(3.0f);
+        navi.Say("「呪われし絵画より怨霊をあぶりだせ」\nだって",true);
         firstintro = true;
         yield return null;
     }
