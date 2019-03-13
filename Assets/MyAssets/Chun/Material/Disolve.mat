@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Disolve
-  m_Shader: {fileID: 4800000, guid: 4b10b101534c0914e95f6caacff17700, type: 3}
+  m_Shader: {fileID: 4800000, guid: 2c68d65fe9da11e4f87f63aaf1e7cf02, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -79,3 +79,5 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _bloomColor: {r: 1, g: 0, b: 0, a: 1}
+    - _bloomEmissionColor: {r: 1, g: 0, b: 0.08972883, a: 1}
