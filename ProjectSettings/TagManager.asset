@@ -8,6 +8,8 @@ TagManager:
   - Enemy1
   - Fire
   - EYE
+  - Key
+  - Torch
   layers:
   - Default
   - TransparentFX
