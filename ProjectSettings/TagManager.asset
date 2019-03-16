@@ -8,6 +8,9 @@ TagManager:
   - Enemy1
   - Fire
   - EYE
+  - Hand
+  - Drawer
+  - Standard
   layers:
   - Default
   - TransparentFX
