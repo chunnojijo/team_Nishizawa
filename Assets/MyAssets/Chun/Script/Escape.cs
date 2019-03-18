@@ -46,6 +46,7 @@ public class Escape : MonoBehaviour {
     private float distancefromobjmax=3;
     private float angle;
     private Vector3 changeObject_firstscale;
+    [SerializeField]
     private GameObject parent;
     private GameObject[] particles;
     private Ray[] around;
@@ -71,7 +72,7 @@ public class Escape : MonoBehaviour {
         enemyHP = maxEnemyHP;
         distancefromobj = new float[8];
         around = new Ray[8];
-        parent = this.transform.root.gameObject;
+        //parent = this.transform.root.gameObject;
         Object_finalscale = new Vector3(10.0f, 10.0f, 10.0f);
     }
 	
