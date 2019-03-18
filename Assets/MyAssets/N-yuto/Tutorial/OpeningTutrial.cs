@@ -8,8 +8,12 @@ public class OpeningTutrial : MonoBehaviour {
 
     [SerializeField] string[] OP01_Serif;
     [SerializeField] string[] OP02_Serif;
+    [SerializeField] string[] OP03_Serif;
 
     [SerializeField] GameObject[] OP02_Position;
+    [SerializeField] GameObject[] OP03_Position;
+
+    [SerializeField] GameObject FlashLight;
 
     bool OP02_Can_Start = false;
     [SerializeField] GameObject KeyDropPos;
@@ -109,6 +113,46 @@ public class OpeningTutrial : MonoBehaviour {
     public void OP02_GetReady()
     {
         OP02_Can_Start = true;
+    }
+
+    public IEnumerator OP03()
+    {
+        yield return new WaitForSeconds(3f);
+
+        navi.Comeback();
+
+        yield return new WaitForSeconds(0.5f);
+
+        navi.Say(OP03_Serif[0]);
+
+        yield return new WaitForSeconds(2f);
+
+        navi.Say(OP03_Serif[1]);
+
+        yield return new WaitForSeconds(1f);
+
+        navi.GoTo(OP03_Position[0]);
+
+        yield return new WaitForSeconds(1f);
+
+        FlashLight.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        navi.Say(OP03_Serif[2]);
+
+        yield return new WaitForSeconds(2f);
+
+        navi.Say(OP03_Serif[3],true);
+        navi.ComebackSilently();
+
+        yield break;
+
+    }
+
+    public void OP03_Invoke()
+    {
+        StartCoroutine(OP03());
     }
 
 }
