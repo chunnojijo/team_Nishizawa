@@ -28,7 +28,7 @@ public class NaviSerif : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //rectTransform = textMeshPro.GetComponent<RectTransform>();
-        player = navi.GetComponent<Navi>().Player.transform;
+        player = Camera.main.transform;
         DefaultFontSize = textMeshPro.fontSize;
         NaviToPlayer = player.position - navi.position;
     }
