@@ -164,4 +164,22 @@ public class OutSideSwich : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
     }
+
+    public void GoInside_Invoke()
+    {
+        StartCoroutine(GoInside());
+    }
+    public void Opening_Invoke()
+    {
+        StartCoroutine(Opening());
+    }
+    public void Ending_Invoke()
+    {
+        StartCoroutine(Ending());
+    }
+    public void Title_Invoke()
+    {
+        StartCoroutine(Title());
+    }
+
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Navi : MonoBehaviour {
 
+    [SerializeField] bool IsDebugging;
+
     public GameObject Player;
     [SerializeField] GameObject Key;
 
@@ -49,59 +51,62 @@ public class Navi : MonoBehaviour {
         }
 
 
-     //以降デバッグ用
-        if (Input.GetKeyDown("0"))
+        //以降デバッグ用
+        if (IsDebugging)
         {
-            if (PerchObjects.Length > 0) GoTo(PerchObjects[0]);
-        }
-        if (Input.GetKeyDown("1"))
-        {
-            if (PerchObjects.Length > 1) GoTo(PerchObjects[1]);
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            if (PerchObjects.Length > 2) GoTo(PerchObjects[2]);
-        }
-        if (Input.GetKeyDown("3"))
-        {
-            if (PerchObjects.Length > 3) GoTo(PerchObjects[3]);
-        }
+            if (Input.GetKeyDown("0"))
+            {
+                if (PerchObjects.Length > 0) GoTo(PerchObjects[0]);
+            }
+            if (Input.GetKeyDown("1"))
+            {
+                if (PerchObjects.Length > 1) GoTo(PerchObjects[1]);
+            }
+            if (Input.GetKeyDown("2"))
+            {
+                if (PerchObjects.Length > 2) GoTo(PerchObjects[2]);
+            }
+            if (Input.GetKeyDown("3"))
+            {
+                if (PerchObjects.Length > 3) GoTo(PerchObjects[3]);
+            }
 
 
-        if (Input.GetKeyDown("p"))
-        {
-            Say(0);
-        }
-        if (Input.GetKeyDown("o"))
-        {
-            Say("Good job!!");
-        }
-        if (Input.GetKeyDown("i"))
-        {
-            Say( "Random No. Is ... " + Random.value.ToString(),true);
-        }
+            if (Input.GetKeyDown("p"))
+            {
+                Say(0);
+            }
+            if (Input.GetKeyDown("o"))
+            {
+                Say("Good job!!");
+            }
+            if (Input.GetKeyDown("i"))
+            {
+                Say("Random No. Is ... " + Random.value.ToString(), true);
+            }
 
-        if (Input.GetKeyDown("u"))
-        {
-            Comeback();
-        }
-        if (Input.GetKeyDown("j"))
-        {
-            DontFollowMe();
-        }
+            if (Input.GetKeyDown("u"))
+            {
+                Comeback();
+            }
+            if (Input.GetKeyDown("j"))
+            {
+                DontFollowMe();
+            }
 
-        if (Input.GetKeyDown("l"))
-        {
-            hint = Hint(2f, "ここが怪しいよ！", PerchObjects[1].transform.position);
-        }
-        if (Input.GetKeyDown("k"))
-        {
-            StopHint(hint);
-        }
+            if (Input.GetKeyDown("l"))
+            {
+                hint = Hint(2f, "ここが怪しいよ！", PerchObjects[1].transform.position);
+            }
+            if (Input.GetKeyDown("k"))
+            {
+                StopHint(hint);
+            }
 
-        if (Input.GetKeyDown("n"))
-        {
-            DropKey();
+            if (Input.GetKeyDown("n"))
+            {
+                DropKey();
+            }
         }
 
 

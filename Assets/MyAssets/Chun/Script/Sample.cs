@@ -45,7 +45,7 @@ public class Sample : MonoBehaviour {
             ray = new Ray(camerarig.transform.position, Objects[i].transform.TransformPoint(damagesc[i].transform.localPosition)- camerarig.transform.position);
             if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(camerarig.transform.forward.normalized, ray.direction.normalized) > 0.94f))
             {
-                Debug.Log("Find");
+               // Debug.Log("Find");
 
                 //damagesc[i].GetComponent<Escape>().damage = true;
                 if (hit.transform.tag == Objects[i].transform.tag)
