@@ -6,7 +6,7 @@ using TMPro;
 public class NaviSerif : MonoBehaviour {
 
     [SerializeField] Transform navi;
-    [SerializeField] Transform player;
+    Transform player;
     [SerializeField] Transform canvas;
 
     [SerializeField] TextMeshProUGUI textMeshPro;
@@ -28,6 +28,7 @@ public class NaviSerif : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //rectTransform = textMeshPro.GetComponent<RectTransform>();
+        player = navi.GetComponent<Navi>().Player.transform;
         DefaultFontSize = textMeshPro.fontSize;
         NaviToPlayer = player.position - navi.position;
     }
