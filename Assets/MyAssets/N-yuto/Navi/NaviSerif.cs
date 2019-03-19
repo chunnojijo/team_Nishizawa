@@ -58,7 +58,7 @@ public class NaviSerif : MonoBehaviour {
         textMeshPro.fontSize = DefaultFontSize + DeltaMagnitude * fontSizeCoefficcient;
         //Debug.Log(NaviToPlayer.magnitude);
 
-        canvas.forward = Camera.main.transform.forward;
+        canvas.forward = -NaviToPlayer;
     }
 
     public void ChangeSerifText(int SerifNumber)
