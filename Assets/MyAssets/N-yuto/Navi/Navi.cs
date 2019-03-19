@@ -47,7 +47,7 @@ public class Navi : MonoBehaviour {
 
         if (IsFollowingPlayer)
         {
-            iTween.MoveUpdate(gameObject, playerSidePosition.transform.position, 4f);
+            iTween.MoveUpdate(gameObject, playerSidePosition.transform.position, 2.5f);
         }
 
 
