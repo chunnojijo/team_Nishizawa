@@ -54,7 +54,7 @@ public class DoorOpen : MonoBehaviour
         if (other.tag == "Key")
         {
             open = true;
-            Destroy(other);
+            other.GetComponent<MeshRenderer>().enabled = false;
         }
     }
 }
