@@ -8,6 +8,7 @@ public class AppearGhost : MonoBehaviour {
     float time = 0;
     [SerializeField]
     private GameObject Ghost;
+    private bool first=true;
 	// Use this for initialization
 	void Start () {
         IEnumerator coroutine;
@@ -21,7 +22,11 @@ public class AppearGhost : MonoBehaviour {
         }
         if (time > 0.5f)
         {
-            Ghost.GetComponent<Escape>().appear = true;
+            if (first)
+            {
+                first = false;
+                Ghost.GetComponent<Escape>().appear = true;
+            }
         }
 	}
 

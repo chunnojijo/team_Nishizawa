@@ -39,7 +39,7 @@ public class GhostPictureDisolve : MonoBehaviour {
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Torch")
+        if (other.tag == "Torch"&&!disolve)
         {
             time = 0;
         }
