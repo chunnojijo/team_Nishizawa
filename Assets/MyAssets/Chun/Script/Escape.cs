@@ -61,6 +61,8 @@ public class Escape : MonoBehaviour {
     private ParticleSystem damageparticle;
     [SerializeField]
     private Slider slider;
+    [SerializeField]
+    private bool appear_from_other_script;
     
     void Start () {
         audiosource = this.GetComponents<AudioSource>();
@@ -144,11 +146,13 @@ public class Escape : MonoBehaviour {
             slider.gameObject.SetActive(false);
         }
 
-        //変身するものがない場合　出現判定
-        if ((player.transform.position - parent.transform.position).magnitude < 5 && apfirst && changeObject == null)
+        //変身するものがなく，かつ出現条件がほかのスクリプトに依存しない場合　出現判定
+        if ((player.transform.position - parent.transform.position).magnitude < 5 && apfirst && changeObject == null&&!appear_from_other_script)
         {
             appear = true;
         }
+
+        
 
         //変身する者がある場合　出現判定
         if (damage && apfirst && changeObject != null)
@@ -244,6 +248,7 @@ public class Escape : MonoBehaviour {
     /// </summary>
     void Escapefromplayer()
     {
+        escapegoto = false;
         if (escapeflag)
         {
             if ((escape && !damage && !apfirst && !dieatall) || escapegoto)
@@ -309,7 +314,7 @@ public class Escape : MonoBehaviour {
                 //目的方向へ移動
                 if (move)
                 {
-                    parent.transform.position += parent.transform.forward.normalized * movespeed;
+                    if(distancefromobjmax>1.0f)parent.transform.position += parent.transform.forward.normalized * movespeed;
                     distancefromobjmax -= movespeed;
                     if (distancefromobjmax < 0.5f)
                     {
@@ -361,10 +366,13 @@ public class Escape : MonoBehaviour {
             }
             else
             {
-                escapefirst = true;
-                aftermovefirst = true;
-                rotationmove = true;
-                maxdirection = 0;
+                if (!damage)
+                {
+                    escapefirst = true;
+                    aftermovefirst = true;
+                    rotationmove = true;
+                    maxdirection = 0;
+                }
             }
         }
     }

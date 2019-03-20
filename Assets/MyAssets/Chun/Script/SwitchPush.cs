@@ -33,7 +33,7 @@ public class SwitchPush : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.tag == "Player")
+        if (other.transform.tag == "PlayerHand")
         {
             this.GetComponent<Animator>().SetTrigger("Push");
             push = true;
