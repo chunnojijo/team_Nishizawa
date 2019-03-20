@@ -34,6 +34,7 @@ public class Navi : MonoBehaviour {
     bool FollowLookingObj = false;
     GameObject LookObj;
     Vector3 LookPos;
+    GameObject IsFollowing;
 
     // Use this for initialization
     void Start () {
@@ -43,11 +44,18 @@ public class Navi : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        
+
 
         if (IsFollowingPlayer)
         {
             iTween.MoveUpdate(gameObject, playerSidePosition.transform.position, 2.5f);
+        }
+        else
+        {
+            if (IsFollowing)
+            {
+                iTween.MoveUpdate(gameObject, IsFollowing.transform.position, 2.5f);
+            }
         }
 
 
@@ -131,17 +139,27 @@ public class Navi : MonoBehaviour {
 
     }
 
-    public void GoTo(GameObject Target)
+    public void GoTo(GameObject Target,bool Follow = false)
     {
         iTween.MoveTo(this.gameObject, Target.transform.position, MoveTime);
         VoiceScript.Play(0);
         IsFollowingPlayer = false;
+        if (Follow)
+        {
+            IsFollowing = Target;
+        }
+        else
+        {
+            IsFollowing = null;
+        }
     }
     public void GoTo(Vector3 WorldPosition)
     {
         iTween.MoveTo(this.gameObject, WorldPosition, MoveTime);
         VoiceScript.Play(0);
         IsFollowingPlayer = false;
+        IsFollowing = null;
+
     }
 
     public void Say(string serif, bool permanent = false)
