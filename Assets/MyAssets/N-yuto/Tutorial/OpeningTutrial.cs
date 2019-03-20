@@ -38,6 +38,8 @@ public class OpeningTutrial : MonoBehaviour {
 
     public IEnumerator OP01()
     {
+        FlashLight.SetActive(false);
+
         navi.Comeback();
         navi.LookMe();
 

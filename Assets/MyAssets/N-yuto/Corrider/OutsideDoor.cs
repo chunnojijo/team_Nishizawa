@@ -12,6 +12,8 @@ public class OutsideDoor : MonoBehaviour
 
     [SerializeField] UnityEvent DoorOpenEvent;
 
+    [SerializeField] OVRGrabber grabber;
+
     /*
     [SerializeField] GameObject StartPos;
     [SerializeField] GameObject EndPos;
@@ -39,8 +41,9 @@ public class OutsideDoor : MonoBehaviour
     {
         if (other.tag == "Key")
         {
+            GrabRelease.ReleaseAllObjects();
             StartCoroutine(Unlock());
-            Destroy(other);
+            other.gameObject.SetActive(false);
         }
     }
 
@@ -58,7 +61,7 @@ public class OutsideDoor : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        //DoorOpenEvent.Invoke();
+        DoorOpenEvent.Invoke();
 
         yield return null;
 
