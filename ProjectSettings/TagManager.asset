@@ -10,6 +10,7 @@ TagManager:
   - EYE
   - Key
   - Torch
+  - PlayerHand
   layers:
   - Default
   - TransparentFX
