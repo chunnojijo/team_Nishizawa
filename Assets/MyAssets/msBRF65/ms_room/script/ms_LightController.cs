@@ -12,14 +12,11 @@ public class ms_LightController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(lock_light == false)
-        {
-            this.gameObject.SetActive(true);
-        }
+		
 	}
 
     public void UnLock()
     {
-        lock_light = false;
+        
     }
 }
