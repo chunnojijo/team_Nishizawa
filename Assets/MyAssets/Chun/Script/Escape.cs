@@ -21,6 +21,8 @@ public class Escape : MonoBehaviour {
     public GameObject Heart;
     public GameObject changeObject;//変身元のオブジェクトを入れる　ない場合はNone
     public Vector3 Object_finalscale=new Vector3(10.0f,10.0f,10.0f);
+    public float damagingspeed = 0.3f;
+    public float changespeed = 1;
 
     private bool escapefirst = true;
     private bool die = false;
@@ -46,6 +48,7 @@ public class Escape : MonoBehaviour {
     private float distancefromobjmax=3;
     private float angle;
     private Vector3 changeObject_firstscale;
+    private OVRHapticsClip hapticsClip;
     [SerializeField]
     private GameObject parent;
     private GameObject[] particles;
@@ -63,7 +66,11 @@ public class Escape : MonoBehaviour {
     private Slider slider;
     [SerializeField]
     private bool appear_from_other_script;
-    
+    [SerializeField]
+    private GameObject SliderBackGround;
+    [SerializeField]
+    private GameObject SliderFill;
+
     void Start () {
         audiosource = this.GetComponents<AudioSource>();
         particlesystem = this.GetComponentsInChildren<ParticleSystem>();
@@ -75,7 +82,12 @@ public class Escape : MonoBehaviour {
         distancefromobj = new float[8];
         around = new Ray[8];
         //parent = this.transform.root.gameObject;
-        Object_finalscale = new Vector3(10.0f, 10.0f, 10.0f);
+        Object_finalscale = new Vector3(10.0f, 10.0f, 10.0f); byte[] samples = new byte[8];
+        for (int i = 0; i < samples.Length; i++)
+        {
+            samples[i] = 128;
+        }
+        hapticsClip = new OVRHapticsClip(samples, samples.Length);
     }
 	
 
@@ -87,8 +99,12 @@ public class Escape : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.D) && !damage) damage = true;
         else if (Input.GetKeyDown(KeyCode.D)) damage = false;
         //For Debug
-        
-       
+        GetComponent<Renderer>().material.SetFloat("_Alpha", (1+Mathf.Sin(Time.realtimeSinceStartup * changespeed))/2.0f);
+        SliderBackGround.GetComponent<Image>().color = new Color(SliderBackGround.GetComponent<Image>().color.r, SliderBackGround.GetComponent<Image>().color.g, SliderBackGround.GetComponent<Image>().color.b,(1 + Mathf.Sin(Time.realtimeSinceStartup * changespeed)) / 2.0f );
+
+        SliderFill.GetComponent<Image>().color = new Color(SliderFill.GetComponent<Image>().color.r, SliderFill.GetComponent<Image>().color.g, SliderFill.GetComponent<Image>().color.b, (1 + Mathf.Sin(Time.realtimeSinceStartup * changespeed)) / 2.0f );
+
+
 
         if ((player.transform.position - parent.transform.position).magnitude < escapedistance&&!escape)
         {
@@ -111,7 +127,11 @@ public class Escape : MonoBehaviour {
         //slider.transform.LookAt(transform.TransformPoint(player.transform.position));
         //HPバーの処理
 
-
+        if (damage && !dieatall && this.transform.localScale.x > 1) 
+        {
+            OVRHaptics.LeftChannel.Mix(hapticsClip);
+            Debug.Log("振動");
+        }
 
         Defeat();
        
@@ -242,7 +262,7 @@ public class Escape : MonoBehaviour {
 
 
 
-
+    
     /// <summary>
     /// プレイヤーから逃げる処理　escape=trueで逃げる処理が始まる
     /// </summary>
@@ -251,11 +271,11 @@ public class Escape : MonoBehaviour {
         escapegoto = false;
         if (escapeflag)
         {
-            if ((escape && !damage && !apfirst && !dieatall) || escapegoto)
+            if ((escape  && !apfirst && !dieatall) || escapegoto)
             {
 
                 //escapeに入ったとき最初だけ行う処理
-                if (escapefirst)
+                if (escapefirst && !damage)
                 {
                     around[0] = new Ray(this.transform.position, this.transform.forward * 1000);
                     around[1] = new Ray(this.transform.position, (this.transform.forward + this.transform.right) * 1000);
@@ -290,7 +310,7 @@ public class Escape : MonoBehaviour {
 
                 //目的方向へ回転
                 Debug.DrawRay(around[maxdirection].origin, around[maxdirection].direction, Color.red);
-                if (rotationmove)
+                if (rotationmove && !damage)
                 {
                     if (angle > 0)
                     {
@@ -314,8 +334,13 @@ public class Escape : MonoBehaviour {
                 //目的方向へ移動
                 if (move)
                 {
-                    if(distancefromobjmax>1.0f)parent.transform.position += parent.transform.forward.normalized * movespeed;
-                    distancefromobjmax -= movespeed;
+                    if (distancefromobjmax > 1.0f)
+                    {
+                        if (!damage) parent.transform.position += parent.transform.forward.normalized * movespeed;
+                        else parent.transform.position += parent.transform.forward.normalized * movespeed * damagingspeed;
+                    }
+                    if (!damage) distancefromobjmax -= movespeed;
+                    else distancefromobjmax -= movespeed * damagingspeed;
                     if (distancefromobjmax < 0.5f)
                     {
                         move = false;
@@ -326,7 +351,7 @@ public class Escape : MonoBehaviour {
 
                 //動いた後プレイヤーの角度を計算
 
-                if (aftermove)
+                if (aftermove && !damage)
                 {
                     //動いた後プレイヤーの角度を計算
                     if (aftermovefirst)

@@ -4,8 +4,9 @@
 		_MainTex ("Albedo (RGB)", 2D) = "white" {}
 		_Glossiness("Smoothness", Range(0,1)) = 0.5
 		_Metallic("Metallic", Range(0,1)) = 0.0
-		_Alpha("Alpha",Range(0,1))=1.0
-	}
+		_Alpha("Alpha",Range(0,1)) = 1.0
+		_EmissionColor("EmissionColor",Color) = (1,1,1,1)
+		_Intensity("Intensity",Range(0,1))=0.0	}
 	SubShader {
 		Tags { "Queue"="Transparent" }
 		LOD 200
@@ -26,7 +27,9 @@
 		half _Glossiness;
 		half _Metallic;
 		half _Alpha;
+		half _Intensity;
 		fixed4 _Color;
+		fixed4 _EmissionColor;
 
 		// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
 		// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
@@ -43,6 +46,7 @@
 			//o.Metallic = _Metallic;
 			//o.Smoothness = _Glossiness;
 			o.Alpha = _Alpha;
+			o.Emission = _EmissionColor * _Intensity;
 		}
 		ENDCG
 	}
