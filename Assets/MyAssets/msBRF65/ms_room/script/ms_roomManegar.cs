@@ -3,32 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ms_roomManegar : MonoBehaviour {
-    private bool obake1die = false, obake2die = false,finish =false;
-    public GameObject obake1, obake2,donuts,cookies,ms_light;
+    public bool finish =false;
+    public GameObject obake1, obake2,donuts,cookies,ms_light,key;
+    Escape escape1, escape2;
 
 	// Use this for initialization
 	void Start () {
         donuts.SetActive(false);
         cookies.SetActive(false);
-	}
+        escape1 = obake1.GetComponent<Escape>();
+        escape2 = obake2.GetComponent<Escape>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
         if (!finish)
         {
-            if (!obake1die && obake1.gameObject.activeSelf == false)
+            if (escape1.dieatall == true)
             {
-                obake1die = true;
                 donuts.SetActive(true);
             }
-            if (!obake2die && obake2.gameObject.activeSelf == false)
+            if (escape2.dieatall == true)
             {
-                obake2die = true;
                 cookies.SetActive(true);
             }
-            if (obake1die && obake2die)
+            if (escape1.dieatall && escape2.dieatall)
             {
-                ms_light.GetComponent<ms_LightController>().UnLock();
+                ms_light.gameObject.SetActive(true);
                 finish = true;
             }
         }
