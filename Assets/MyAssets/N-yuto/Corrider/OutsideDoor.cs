@@ -12,7 +12,6 @@ public class OutsideDoor : MonoBehaviour
 
     [SerializeField] UnityEvent DoorOpenEvent;
 
-    [SerializeField] OVRGrabber grabber;
 
     /*
     [SerializeField] GameObject StartPos;

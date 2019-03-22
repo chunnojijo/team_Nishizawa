@@ -22,7 +22,7 @@ public class OpeningTutrial : MonoBehaviour {
     bool OP02_Can_Start = false;
     [SerializeField] GameObject KeyDropPos;
 
-    bool OP04_CanContinue = false;
+    [HideInInspector] public bool OP04_CanContinue = false;
 
     // Use this for initialization
     void Start () {
@@ -183,7 +183,7 @@ public class OpeningTutrial : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
-        navi.GoTo(OP04_Position[2],true);//HideBackOfPlayer
+        navi.GoTo(OP04_Position[1],true);//HideBackOfPlayer
 
         yield break;
     }
