@@ -88,6 +88,9 @@ public class Escape : MonoBehaviour {
             samples[i] = 128;
         }
         hapticsClip = new OVRHapticsClip(samples, samples.Length);
+
+        SliderBackGround = gameObject.transform.parent.Find("Canvas/Slider/Background").gameObject;
+        SliderFill = gameObject.transform.parent.Find("Canvas/Slider/Fill Area/Fill").gameObject;
     }
 	
 
@@ -127,11 +130,13 @@ public class Escape : MonoBehaviour {
         //slider.transform.LookAt(transform.TransformPoint(player.transform.position));
         //HPバーの処理
 
-        if (damage && !dieatall && this.transform.localScale.x > 1) 
+        if (damage && !dieatall && this.GetComponent<Renderer>().enabled) 
         {
             OVRHaptics.LeftChannel.Mix(hapticsClip);
             Debug.Log("振動");
         }
+
+        
 
         Defeat();
        
@@ -268,7 +273,6 @@ public class Escape : MonoBehaviour {
     /// </summary>
     void Escapefromplayer()
     {
-        escapegoto = false;
         if (escapeflag)
         {
             if ((escape  && !apfirst && !dieatall) || escapegoto)

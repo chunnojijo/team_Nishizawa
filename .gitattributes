@@ -45,3 +45,4 @@
 *copyMarge2.unity filter=lfs diff=lfs merge=lfs -text
 *MargeMarch.unity filter=lfs diff=lfs merge=lfs -text
 *.prefab filter=lfs diff=lfs merge=lfs -text
+Assets/Plugins/Horizon[ON]/Materials/Textures[[:space:]]&[[:space:]]Maps/Mountains/Horizon[ON][[:space:]]Mountains_Albedo.psd filter=lfs diff=lfs merge=lfs -text
