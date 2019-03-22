@@ -5,7 +5,7 @@ using UnityEngine;
 public class KeyController : MonoBehaviour {
     public GameObject ms_roomManegar,player,key;
     ms_roomManegar ms_room;
-    public float key_player_direction = 1f,forcerate_to_key = 0.2f, key_pos_z = 2f;
+    public float key_player_direction = 1f,forcerate_to_key = 0.2f, key_pos_z = 1.23f;
     bool finish_key_animation = false;
 
 	// Use this for initialization
@@ -33,6 +33,6 @@ public class KeyController : MonoBehaviour {
     {
         ms_room.donuts.SetActive(false);
         ms_room.cookies.SetActive(false);
-        key.GetComponent<Rigidbody>().AddForce(new Vector3(-1f,-3f,0f) * forcerate_to_key);
+        key.GetComponent<Rigidbody>().AddForce(new Vector3(-1f,3f,0f) * forcerate_to_key);
     }
 }
