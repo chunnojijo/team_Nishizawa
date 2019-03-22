@@ -21,15 +21,16 @@ public class ms_LightController : MonoBehaviour {
         if (Physics.Raycast(player.transform.position,player.transform.forward, distance))
         {
             color -= Time.deltaTime * color_speed;
-            if(color < 0f)
-            {
-                color = 0f;
-
-                finish_color = true;
-            }
+            
             //Rayが当たったオブジェクトのtagがPlayerだったら
             if (hit.collider.tag == "image" && !finish_color)
             {
+                if (color < 0f)
+                {
+                    color = 0f;
+                    finish_color = true;
+                    shadow_light.SetActive(true);
+                }
                 image.GetComponent<Image>().color = new Color(color, 0f, 0f);
             }
         }
