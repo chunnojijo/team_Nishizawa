@@ -6,6 +6,8 @@ public class FallCeiling : MonoBehaviour {
 
     public GameObject[] falls;
     public GameObject[] walls;
+    public GameObject door;
+    Animator animator;
 
     // Use this for initialization
     void Start()
@@ -14,7 +16,9 @@ public class FallCeiling : MonoBehaviour {
         {
             falls[i].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
-        
+
+        animator = door.GetComponent<Animator>();
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -38,6 +42,8 @@ public class FallCeiling : MonoBehaviour {
         {
             walls[i].SetActive(true);
         }
+
+        animator.Play("Door3Close");
 
     }
 }
