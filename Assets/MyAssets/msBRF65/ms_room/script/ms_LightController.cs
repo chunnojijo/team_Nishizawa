@@ -7,7 +7,7 @@ public class ms_LightController : MonoBehaviour {
     private bool lock_light = true,finish_color = false;
     public GameObject shadow_light,player,image;
     float lighted_time, distance = 3f, color = 255f;
-    public float color_speed = 3f;
+    public float color_speed = 10f;
     Ray player_ray;
     RaycastHit hit;
 
@@ -22,7 +22,7 @@ public class ms_LightController : MonoBehaviour {
         
         if (Physics.Raycast(player_ray, out hit, distance) && image.activeSelf)
         {
-            Debug.Log(hit.collider.tag);
+            //Debug.Log(hit.collider.tag);
             
             //Rayが当たったオブジェクトのtagがimageだったら
             if (hit.collider.tag == "image" && !finish_color)
@@ -34,8 +34,8 @@ public class ms_LightController : MonoBehaviour {
                     finish_color = true;
                     shadow_light.SetActive(true);
                 }
-                Debug.Log(image.GetComponent<Material>().color);
-                image.GetComponent<Material>().color = new Color(color, 0f, 0f);
+                //Debug.Log(image.GetComponent<Renderer>().material.color);
+                image.GetComponent<Renderer>().material.color = new Color(color, 255f, 255f);
             }
         }
     }
