@@ -22,6 +22,7 @@ public class Escape : MonoBehaviour {
     public GameObject changeObject;//変身元のオブジェクトを入れる　ない場合はNone
     public Vector3 Object_finalscale=new Vector3(10.0f,10.0f,10.0f);
     public float damagingspeed = 0.3f;
+    public float damagingspeedrotation = 0.3f;
     public float changespeed = 1;
 
     private bool escapefirst = true;
@@ -335,6 +336,27 @@ public class Escape : MonoBehaviour {
                         move = true;
                     }
                 }
+                if (rotationmove &&damage)
+                {
+                    if (angle > 0)
+                    {
+                        angle -= Rotatemovespeed*damagingspeedrotation;
+                        parent.transform.Rotate(new Vector3(0, Rotatemovespeed * damagingspeedrotation, 0));
+                        //Debug.Log("angle=" + angle);
+                    }
+                    if (angle <= 0)
+                    {
+                        angle += Rotatemovespeed * damagingspeedrotation;
+                        parent.transform.Rotate(new Vector3(0, -Rotatemovespeed * damagingspeedrotation, 0));
+                        //Debug.Log("angle=" + angle);
+                    }
+                    if (angle < Rotatemovespeed * 2 && -Rotatemovespeed * 2 < angle)
+                    {
+                        rotationmove = false;
+                        move = true;
+                    }
+                }
+
 
                 //目的方向へ移動
                 if (move)
@@ -392,6 +414,43 @@ public class Escape : MonoBehaviour {
                     }
 
                 }
+                if (aftermove && damage)
+                {
+                    //動いた後プレイヤーの角度を計算
+                    if (aftermovefirst)
+                    {
+                        aftermovefirst = false;
+                        angle = Vector3.Angle(this.transform.forward, player.transform.position - this.transform.position) * (Vector3.Cross(this.transform.forward, player.transform.position - this.transform.position).y < 0 ? -1 : 1);
+                    }
+
+                    //プレイヤーの向きへ回転
+                    if (angle > 0)
+                    {
+                        angle -= Rotatemovespeed * damagingspeedrotation; 
+                        parent.transform.Rotate(new Vector3(0, Rotatemovespeed * damagingspeedrotation, 0));
+                        //Debug.Log("angle=" + angle);
+                    }
+                    if (angle <= 0)
+                    {
+                        angle += Rotatemovespeed * damagingspeedrotation;
+                        parent.transform.Rotate(new Vector3(0, -Rotatemovespeed * damagingspeedrotation, 0));
+                        //Debug.Log("angle=" + angle);
+                    }
+                    if (angle < Rotatemovespeed * 2 && -Rotatemovespeed * 2 < angle)
+                    {
+                        aftermove = false;
+                        escape = false;
+                        audiosource[2].Play();
+                        escapefirst = true;
+                        aftermovefirst = true;
+                        rotationmove = true;
+                        escapefirstfinish = true;
+                        escapegoto = false;
+                        maxdirection = 0;
+                    }
+
+                }
+
 
             }
             else
