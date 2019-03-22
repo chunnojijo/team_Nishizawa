@@ -89,8 +89,8 @@ public class Escape : MonoBehaviour {
         }
         hapticsClip = new OVRHapticsClip(samples, samples.Length);
 
-        SliderBackGround = gameObject.transform.parent.FindChild("Canvas/Slider/Background").gameObject;
-        SliderFill = gameObject.transform.parent.FindChild("Canvas/Slider/Fill Area/Fill").gameObject;
+        SliderBackGround = gameObject.transform.parent.Find("Canvas/Slider/Background").gameObject;
+        SliderFill = gameObject.transform.parent.Find("Canvas/Slider/Fill Area/Fill").gameObject;
     }
 	
 
@@ -273,7 +273,6 @@ public class Escape : MonoBehaviour {
     /// </summary>
     void Escapefromplayer()
     {
-        escapegoto = false;
         if (escapeflag)
         {
             if ((escape  && !apfirst && !dieatall) || escapegoto)

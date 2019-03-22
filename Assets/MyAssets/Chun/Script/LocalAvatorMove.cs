@@ -63,7 +63,7 @@ public class LocalAvatorMove : MonoBehaviour {
 
     IEnumerator move()
     {
-        if (!OVRInput.Get(OVRInput.RawButton.RIndexTrigger)) this.GetComponent<CharacterController>().Move(new Vector3((camerarig.transform.forward.normalized * movespeed*Time.deltaTime).x,0, (camerarig.transform.forward.normalized * movespeed * Time.deltaTime).z));
+        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger)) this.GetComponent<CharacterController>().Move(new Vector3((camerarig.transform.forward.normalized * movespeed*Time.deltaTime).x,0, (camerarig.transform.forward.normalized * movespeed * Time.deltaTime).z));
         yield return new WaitForSeconds(0.7f);
     }
 }
