@@ -8,9 +8,13 @@ TagManager:
   - Enemy1
   - Fire
   - EYE
+  - Hand
+  - Drawer
+  - Standard
   - Key
   - Torch
   - PlayerHand
+  
   layers:
   - Default
   - TransparentFX
