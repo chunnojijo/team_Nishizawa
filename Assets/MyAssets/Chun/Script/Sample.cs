@@ -37,8 +37,8 @@ public class Sample : MonoBehaviour {
 
         for(int i = 0;i < Objects.Length; i++)
         {
-            damagesc[i] = this.GetComponentInChildren<Escape>().gameObject;
-
+            damagesc[i] = Objects[i].GetComponentInChildren<Escape>().gameObject;
+            Debug.Log(i + "find circle");
         }
     }
 	
