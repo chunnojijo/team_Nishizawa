@@ -19,10 +19,10 @@ public class ms_LightController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         player_ray = new Ray(player.transform.position, player.transform.forward);
-        
+
         if (Physics.Raycast(player_ray, out hit, distance) && image.activeSelf)
         {
-            //Debug.Log(hit.collider.tag);
+            Debug.Log(hit.collider.tag);
             
             //Rayが当たったオブジェクトのtagがimageだったら
             if (hit.collider.tag == "image" && !finish_color)
@@ -34,7 +34,7 @@ public class ms_LightController : MonoBehaviour {
                     finish_color = true;
                     shadow_light.SetActive(true);
                 }
-                //Debug.Log(image.GetComponent<Renderer>().material.color);
+                Debug.Log(image.GetComponent<Renderer>().material.color);
                 image.GetComponent<Renderer>().material.color = new Color(color, 255f, 255f);
             }
         }
