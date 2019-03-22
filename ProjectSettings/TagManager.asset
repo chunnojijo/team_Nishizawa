@@ -11,6 +11,10 @@ TagManager:
   - Hand
   - Drawer
   - Standard
+  - Key
+  - Torch
+  - PlayerHand
+  
   layers:
   - Default
   - TransparentFX

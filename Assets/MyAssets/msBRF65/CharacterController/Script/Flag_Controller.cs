@@ -9,7 +9,7 @@ public class Flag_Controller : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        sc_Text1 = Text1.GetComponent<TextController>();
+    //    sc_Text1 = Text1.GetComponent<TextController>();
     }
 	
 	// Update is called once per frame
@@ -26,6 +26,7 @@ public class Flag_Controller : MonoBehaviour {
         }
     }
 
+    /*
     IEnumerator Start_Serif()
     {
         Debug.Log(sc_Text1.text.Length);
@@ -36,6 +37,6 @@ public class Flag_Controller : MonoBehaviour {
         }
         GameObject.Destroy(this.gameObject);
 
-    }
+    }*/
 }
 
