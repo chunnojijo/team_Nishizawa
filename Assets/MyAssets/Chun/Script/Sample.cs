@@ -7,7 +7,7 @@ public class Sample : MonoBehaviour {
     public float theta=60.0f;
     public float lightdistance=200.0f;
     public GameObject[] Objects;
-    public GameObject[] damagesc;
+    [HideInInspector] public GameObject[] damagesc;
     public GameObject camerarig;
     
     private RaycastHit hit;
@@ -33,8 +33,14 @@ public class Sample : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
-	}
+        damagesc = new GameObject[Objects.Length];
+
+        for(int i = 0;i < Objects.Length; i++)
+        {
+            damagesc[i] = this.GetComponentInChildren<Escape>().gameObject;
+
+        }
+    }
 	
 	// Update is called once per frame
 	void Update () {
