@@ -22,7 +22,8 @@ public class ms_LightController : MonoBehaviour {
 
         if (Physics.Raycast(player_ray, out hit, distance) && image.activeSelf)
         {
-            Debug.Log(hit.collider.tag);
+            //Debug.LogWarning(hit.transform.name);
+            //Destroy(hit.collider);
             
             //Rayが当たったオブジェクトのtagがimageだったら
             if (hit.collider.tag == "image" && !finish_color)

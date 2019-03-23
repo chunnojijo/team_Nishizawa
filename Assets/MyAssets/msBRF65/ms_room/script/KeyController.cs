@@ -5,7 +5,7 @@ using UnityEngine;
 public class KeyController : MonoBehaviour {
     public GameObject ms_roomManegar,player,key;
     ms_roomManegar ms_room;
-    public float key_player_direction = 1f,forcerate_to_key = 0.2f, key_pos_z = 1.23f;
+    public float key_player_direction = 2.0f,forcerate_to_key = 0.2f, key_pos_z = 1.23f;
     bool finish_key_animation = false;
 
 	// Use this for initialization
@@ -17,6 +17,7 @@ public class KeyController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(Vector3.Distance(player.transform.position, this.transform.position));
         if(ms_room.finish == true && !finish_key_animation && Vector3.Distance(player.transform.position , this.transform.position) < key_player_direction)
         {
             key.gameObject.SetActive(true);

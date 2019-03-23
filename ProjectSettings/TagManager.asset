@@ -11,6 +11,7 @@ TagManager:
   - Key
   - Torch
   - PlayerHand
+  - image
   layers:
   - Default
   - TransparentFX
@@ -21,8 +22,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
+  - RoomBorder
+  - Player
   - 
   - 
   - 
