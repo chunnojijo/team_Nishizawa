@@ -12,6 +12,10 @@ TagManager:
   - Torch
   - PlayerHand
   - image
+  - Standard
+  - Hand
+  - Drawer
+  - Stopper
   layers:
   - Default
   - TransparentFX

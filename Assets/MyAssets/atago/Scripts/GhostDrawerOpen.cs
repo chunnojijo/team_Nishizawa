@@ -15,7 +15,7 @@ public class GhostDrawerOpen : MonoBehaviour {
         CheckOpens();
         CheckCloses();
 
-        if(CheckOpens() == true && CheckCloses() == true)
+        if(CheckOpens() && CheckCloses())
         {
             ghostDrawer.GetComponent<DrawerMove>().enabled = true;
             this.enabled = false;
@@ -25,7 +25,7 @@ public class GhostDrawerOpen : MonoBehaviour {
     bool CheckOpens()
     {
         checkOpen = true;
-        for(int i=0; i<opens.Length && checkOpen == true; i++)
+        for(int i=0; i<opens.Length && checkOpen; i++)
         {
             checkOpen = opens[i].GetComponent<JudgeDrawerOpen>().drawerState;
         }
@@ -36,7 +36,7 @@ public class GhostDrawerOpen : MonoBehaviour {
     bool CheckCloses()
     {
         checkClose = true;
-        for(int i=0; i<closes.Length && checkClose == true; i++)
+        for(int i=0; i<closes.Length && checkClose; i++)
         {
             checkClose = !closes[i].GetComponent<JudgeDrawerOpen>().drawerState;
         }
