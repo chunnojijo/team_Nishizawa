@@ -5,7 +5,7 @@ using UnityEngine;
 public class FallCeiling : MonoBehaviour {
 
     public GameObject[] falls;
-    public GameObject[] walls;
+    public GameObject[] ghosts;
     public GameObject door;
     Animator animator;
 
@@ -30,17 +30,17 @@ public class FallCeiling : MonoBehaviour {
                 falls[i].GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             }
 
-            Invoke("CreateWall", 2f);
+            Invoke("GhostAppear", 2f);
 
             gameObject.SetActive(false);
         }
     }
 
-    void CreateWall()
+    void GhostAppear()
     {
-        for (int i = 0; i < walls.Length; i++)
+        for (int i = 0; i < ghosts.Length; i++)
         {
-            walls[i].SetActive(true);
+            ghosts[i].GetComponent<Escape>().appear = true;
         }
 
         animator.Play("Door3Close");
