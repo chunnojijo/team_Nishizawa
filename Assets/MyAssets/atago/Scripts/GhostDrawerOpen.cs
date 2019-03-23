@@ -18,6 +18,7 @@ public class GhostDrawerOpen : MonoBehaviour {
         if(CheckOpens() && CheckCloses())
         {
             ghostDrawer.GetComponent<DrawerMove>().enabled = true;
+            ghostDrawer.GetComponent<MeshCollider>().enabled = true;
             this.enabled = false;
         }
     }
