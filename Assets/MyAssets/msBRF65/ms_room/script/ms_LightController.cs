@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ms_LightController : MonoBehaviour {
-    private bool lock_light = true,finish_color = false;
+    private bool lock_light = true;
+    public bool finish_color = false;
     public GameObject shadow_light,player,image;
     float lighted_time, distance = 3f, color = 255f;
     public float color_speed = 10f;
