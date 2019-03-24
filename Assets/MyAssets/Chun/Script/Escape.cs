@@ -237,7 +237,7 @@ public class Escape : MonoBehaviour {
         }
 
         //左が変身する者がない場合、右が変身する者がある場合のダメージ判定　中身はダメージ処理
-        if ((damage && !apfirst && !dieatall && changeObject == null)||(damage && !apfirst && !dieatall && changeObject != null && escapefirstfinish))
+        if ((damage && !apfirst && !dieatall))
         {
             if (!damagefirst)
             {
