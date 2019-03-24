@@ -19,6 +19,7 @@ public class GhostDrawerOpen : MonoBehaviour {
         {
             ghostDrawer.GetComponent<DrawerMove>().enabled = true;
             ghostDrawer.GetComponent<MeshCollider>().enabled = true;
+            GetComponent<AudioSource>().Play();
             this.enabled = false;
         }
     }
