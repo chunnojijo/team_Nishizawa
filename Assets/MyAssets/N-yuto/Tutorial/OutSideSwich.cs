@@ -35,9 +35,16 @@ public class OutSideSwich : MonoBehaviour {
     void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    [ContextMenu("OP")]
+
+    private void OPevInvoke()
+    {
+        ON_OpeningMode.Invoke();
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if (Input.GetKeyDown("o") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
