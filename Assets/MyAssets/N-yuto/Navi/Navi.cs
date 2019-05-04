@@ -252,8 +252,9 @@ public class Navi : MonoBehaviour {
     public void DropKey()
     {
         Key.SetActive(true);
-        KeyRb.position = gameObject.transform.position;
-        KeyRb.velocity = ( Vector3.up + KeyDropPosition.transform.position - gameObject.transform.position ) * DropSpeed;
+        Key.transform.position = gameObject.transform.position;
+        iTween.MoveAdd(Key, iTween.Hash("x", -1f, "easeType", iTween.EaseType.easeOutBack, "time", 2f));
+        //KeyRb.velocity = ( Vector3.up + KeyDropPosition.transform.position - gameObject.transform.position ) * DropSpeed;
     }
 
     public Coroutine Hint(float time, string serif, Vector3 position)
