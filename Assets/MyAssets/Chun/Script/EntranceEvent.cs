@@ -95,9 +95,6 @@ public class EntranceEvent : MonoBehaviour {
         {
             yield return null;
         }
-
-        navi.
-
-        yield break;
+        
     }
 }

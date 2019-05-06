@@ -19,7 +19,10 @@ public class DoorLockEvent : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        Door.GetComponent<Animator>().SetTrigger("DoorLock");
-        this.GetComponent<AudioSource>().Play();
+        if (other.tag == "Player")
+        {
+            Door.GetComponent<Animator>().SetTrigger("DoorClose");
+            this.GetComponent<AudioSource>().Play();
+        }
     }
 }
