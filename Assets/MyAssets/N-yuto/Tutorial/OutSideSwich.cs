@@ -110,6 +110,7 @@ public class OutSideSwich : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
+        StartCoroutine(openingEvent.OP03());
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
     }
 

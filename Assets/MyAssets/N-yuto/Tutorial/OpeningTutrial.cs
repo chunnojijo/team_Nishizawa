@@ -133,15 +133,17 @@ public class OpeningTutrial : MonoBehaviour {
 
     public IEnumerator OP03()
     {
-        yield return new WaitForSeconds(3f);
-
+        yield return new WaitForSeconds(2f);
+        /*/Debug.LogWarning(1);
         DoorCloseSource.Play();
         yield return new WaitForSeconds(1.5f);
         
+        Debug.Log(1);
         DoorLockSource.Play();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1f);*/
 
+        Debug.Log(1);
         navi.Comeback();
 
         yield return new WaitForSeconds(1f);
