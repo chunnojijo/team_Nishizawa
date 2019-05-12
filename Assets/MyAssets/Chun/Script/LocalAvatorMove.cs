@@ -48,11 +48,11 @@ public class LocalAvatorMove : MonoBehaviour {
         befpos = handright.transform.position;
         if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickLeft))
         {
-            transform.RotateAround(HMD.transform.position,Vector3.up,-22.5f);
+            transform.RotateAround(this.transform.position + CC.center,Vector3.up,-22.5f);
         }
         if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickRight))
         {
-            transform.RotateAround(HMD.transform.position,Vector3.up,22.5f);
+            transform.RotateAround(this.transform.position + CC.center, Vector3.up,22.5f);
         }
         if (!CC.isGrounded)
         {
