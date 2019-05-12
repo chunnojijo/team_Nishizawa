@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ms_roomManegar : MonoBehaviour {
     public bool finish =false;
-    public GameObject obake1,obake2,donuts,cookies,ms_light,key,navi,navi_pos;
+    public GameObject obake1,obake2,donuts,cookies,ms_light_plane,key,navi,navi_pos,ms_light;
     Escape escape1, escape2;
     Navi navi_s;
 
@@ -40,7 +40,7 @@ public class ms_roomManegar : MonoBehaviour {
             }
             if (escape1.dieatall && escape2.dieatall)
             {
-                ms_light.gameObject.SetActive(true);
+                ms_light_plane.gameObject.SetActive(true);
                 StartCoroutine("hint");
             }
             if (ms_light.GetComponent<ms_LightController>().finish_color)
