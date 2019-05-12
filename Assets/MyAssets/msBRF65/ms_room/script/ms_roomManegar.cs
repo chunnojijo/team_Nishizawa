@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class ms_roomManegar : MonoBehaviour {
     public bool finish =false;
-    public GameObject obake1,obake2,donuts,cookies,ms_light,key,navi;
+    public GameObject obake1,obake2,donuts,cookies,ms_light,key,navi,navi_pos;
     Escape escape1, escape2;
     Navi navi_s;
 
 	// Use this for initialization
 	void Start () {
         navi_s = navi.GetComponent<Navi>();
-        StartCoroutine("first_serif");
+        
         donuts.SetActive(false);
         cookies.SetActive(false);
         escape1 = obake1.GetComponent<Escape>();
         escape2 = obake2.GetComponent<Escape>();
+
     }
 	
 	// Update is called once per frame
 	void Update () {
+
         Debug.Log(escape1);
         Debug.Log(escape2.dieatall);
         if (!finish)
         {
+            if (navi_pos.GetComponent<start_navi>().collision)
+            {
+                StartCoroutine("first_serif");
+            }
             if (escape1.dieatall == true)
             {
                 donuts.SetActive(true);
@@ -36,7 +42,10 @@ public class ms_roomManegar : MonoBehaviour {
             {
                 ms_light.gameObject.SetActive(true);
                 StartCoroutine("hint");
-                finish = true;
+            }
+            if (ms_light.GetComponent<ms_LightController>().finish_color)
+            {
+                StartCoroutine("hint_getkey");
             }
         }
     }
@@ -44,7 +53,7 @@ public class ms_roomManegar : MonoBehaviour {
     IEnumerator first_serif()
     {
         yield return new WaitForSeconds(3f);
-        navi_s.GoTo(new Vector3(-19.27f,1.26f,-4.64f));
+        navi_s.GoTo(navi_pos.transform.position);
         yield return new WaitForSeconds(3f);
         navi_s.Say("ここでは、お菓子好きのお化けがいるよ");
         yield return new WaitForSeconds(3f);
@@ -56,6 +65,16 @@ public class ms_roomManegar : MonoBehaviour {
     {
         yield return new WaitForSeconds(3f);
         navi_s.Say("鍵を手に入れないと、出れないよ！");
+        yield return new WaitForSeconds(3f);
+        navi_s.Say("あそこにあるChargeの文字は何だろう？？");
+        yield return new WaitForSeconds(3f);
+    }
+    IEnumerator hint_getkey()
+    {
+        yield return new WaitForSeconds(3f);
+        navi_s.Say("鍵の影が出てきたね！");
+        yield return new WaitForSeconds(3f);
+        navi_s.Say("近づいてみたら何かあるかも，，？");
         yield return new WaitForSeconds(3f);
     }
 }
