@@ -177,7 +177,7 @@ public class OpeningTutrial : MonoBehaviour {
         yield return new WaitForSeconds(3f);
 
         navi.Say(OP03_Serif[3],true);
-        navi.ComebackSilently();
+        navi.GoTo(OP03_Position[1]);
 
         yield break;
 
