@@ -10,8 +10,9 @@ public class LocalAvatorMove : MonoBehaviour {
     private float movespeed;
     [SerializeField]
     private GameObject handright;
+    [UnityEngine.Serialization.FormerlySerializedAs("camerarig")]
     [SerializeField]
-    private GameObject camerarig;//HMD
+    private GameObject HMD;//centerEyeAnchor
     private bool bef_move_sign;
     private bool move_sign;
     private Vector3 befpos;
@@ -19,12 +20,13 @@ public class LocalAvatorMove : MonoBehaviour {
     private Vector2 stickL;
     private Vector3 movestick;
 
-    Vector3 defHMDpos;
+    CharacterController CC;
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        CC = this.GetComponent<CharacterController>();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -40,32 +42,36 @@ public class LocalAvatorMove : MonoBehaviour {
         {
             StartCoroutine("move");
         }
-        
 
 
         bef_move_sign =move_sign;
         befpos = handright.transform.position;
         if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickLeft))
         {
-            transform.RotateAround(camerarig.transform.position,Vector3.up,-22.5f);
+            transform.RotateAround(HMD.transform.position,Vector3.up,-22.5f);
         }
         if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickRight))
         {
-            transform.RotateAround(camerarig.transform.position,Vector3.up,22.5f);
+            transform.RotateAround(HMD.transform.position,Vector3.up,22.5f);
         }
-        if (!this.GetComponent<CharacterController>().isGrounded)
+        if (!CC.isGrounded)
         {
-            this.GetComponent<CharacterController>().Move(new Vector3(0, -3 * Time.deltaTime, 0));
+            CC.Move(new Vector3(0, -3 * Time.deltaTime, 0));
         }
         stickL = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick);
         Debug.Log(stickL.x + stickL.y);
-        movestick = (stickL.y * camerarig.transform.forward.normalized + stickL.x * camerarig.transform.right.normalized) * movespeedcontroller;
-        this.GetComponent<CharacterController>().Move(movestick*Time.deltaTime);
+        movestick = (stickL.y * HMD.transform.forward + stickL.x * HMD.transform.right) * movespeedcontroller;
+        CC.Move(movestick*Time.deltaTime);
     }
+
+
 
     IEnumerator move()
     {
-        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger)) this.GetComponent<CharacterController>().Move(new Vector3((camerarig.transform.forward.normalized * movespeed*Time.deltaTime).x,0, (camerarig.transform.forward.normalized * movespeed * Time.deltaTime).z));
+        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+        {
+            CC.Move(Vector3.ProjectOnPlane(HMD.transform.forward, Vector3.up).normalized * movespeed * Time.deltaTime);
+        }
         yield return new WaitForSeconds(0.7f);
     }
 

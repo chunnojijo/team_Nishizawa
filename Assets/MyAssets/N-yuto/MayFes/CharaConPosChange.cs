@@ -12,7 +12,7 @@ public class CharaConPosChange : MonoBehaviour {
 	void Start () {
 		CC = GetComponent<CharacterController>();
 
-		Invoke("Change",5f);
+		Invoke("Change",0.5f);
 	}
 	
 	// Update is called once per frame
@@ -24,12 +24,17 @@ public class CharaConPosChange : MonoBehaviour {
 				Change();
 				Debug.LogWarning("CC Moved");
 			}
+            if (Input.GetKeyDown("r"))
+            {
+                transform.RotateAround(HMD.transform.position, Vector3.up, -22.5f);
+            }
 
-		}
+        }
 	}
 
-	void Change(){
-		CC.center = Quaternion.AngleAxis(transform.eulerAngles.y,Vector3.up) * (new Vector3(-(this.transform.position - HMD.transform.position).x,CC.center.y,-(this.transform.position - HMD.transform.position).z));
-
+	public void Change(){
+        Vector3 localPos = this.transform.InverseTransformPoint(HMD.transform.position);
+        //Debug.Log(localPos + "<-local world->" + HMD.transform.position);
+		CC.center =new Vector3(localPos.x,CC.center.y,localPos.z);
 	}
 }
