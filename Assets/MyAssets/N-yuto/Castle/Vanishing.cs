@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Vanishing : MonoBehaviour {
 
@@ -18,6 +19,8 @@ public class Vanishing : MonoBehaviour {
     [Range(0f,1f)] private float Rate = 1;
     [SerializeField] float TimeToFadeOut = 1f;
 
+    [SerializeField] AnimationCurve curve;
+
     private Vector3 DefScale;
 
     bool canVanish = false;
@@ -28,10 +31,18 @@ public class Vanishing : MonoBehaviour {
     [SerializeField] Transform light;
 
     bool IsDamaging = false;
-    float HP = 5f;
+    [SerializeField] float HP = 5f;
     Quaternion DefRot;
 
     [SerializeField] EndingTutrial endingTutrial;
+
+    [Space(1)]
+    [SerializeField, Range(0f, 1f)] float dissolve;
+    [SerializeField] Material[] mats;
+
+    [Space(1)]
+    [SerializeField] ParticleSystem DamageParticle;
+    [SerializeField] Slider HPSlider;
 
 
     // Use this for initialization
@@ -40,11 +51,25 @@ public class Vanishing : MonoBehaviour {
         DefScale = gameObject.transform.localScale;
         Invoke("Can", 3f);
         DefRot = gameObject.transform.rotation;
-        	
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        HPSlider.maxValue = HP;
+
+    }
+
+    private void ChangeDissolveRate(float rate)
+    {
+        foreach (Material mat in mats)
+        {
+            mat.SetFloat("_Threshold", rate);
+        }
+    }
+
+    private void OnValidate()
+    {
+        ChangeDissolveRate(dissolve);
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if (exists && canVanish)
         {
@@ -81,6 +106,7 @@ public class Vanishing : MonoBehaviour {
         if (IsDamaging)
         {
             HP -= Time.deltaTime;
+            HPSlider.value = HP;
             Debug.Log(HP);
         }
 
@@ -99,9 +125,15 @@ public class Vanishing : MonoBehaviour {
                 IsVanishing = false;
             }
 
-            gameObject.transform.localScale = Rate * DefScale;
-            gameObject.transform.Rotate(0f,0f, 540f * Time.deltaTime);
-         //   GhostsParticles.transform.localScale = (1 - Rate) * new Vector3(1,1,1);
+            //5/4追記
+            //ChangeDissolveRate(1-Rate);
+
+            gameObject.transform.localScale = curve.Evaluate(Rate) * DefScale;
+            gameObject.transform.Rotate(0f,0f, 360f * Time.deltaTime);
+            //5/4追記ここまで
+
+
+            //   GhostsParticles.transform.localScale = (1 - Rate) * new Vector3(1,1,1);
 
         }
 
@@ -139,14 +171,16 @@ public class Vanishing : MonoBehaviour {
     void StartDamage()
     {
         if (IsDamaging) { return; }
+        HPSlider.gameObject.SetActive(true);
         iTween.ShakeRotation(gameObject, new Vector3(1, 1, 1), 5f);
+        DamageParticle.Play();
         IsDamaging = true;       
     }
 
     void StopDamage()
     {
         if (!IsDamaging) { return; }
-
+        DamageParticle.Stop();
         iTween.Stop(gameObject, "shake");
         gameObject.transform.rotation = DefRot;
         IsDamaging = false;

@@ -24,6 +24,8 @@ public class OutSideSwich : MonoBehaviour {
 
     [SerializeField] Transform[] Debug_CamPos;
 
+    CharaConPosChange CCPC;
+
 
     public UnityEvent ON_OpeningMode;
     public UnityEvent ON_EndingMode;
@@ -33,11 +35,17 @@ public class OutSideSwich : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        CCPC = player.GetComponent<CharaConPosChange>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    [ContextMenu("OP")]
+    private void OPevInvoke()
+    {
+        ON_OpeningMode.Invoke();
+    }
+
+    // Update is called once per frame
+    void Update () {
 
         if (Input.GetKeyDown("o") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
@@ -63,7 +71,10 @@ public class OutSideSwich : MonoBehaviour {
 
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark, 0.5f);
         GrabRelease.ReleaseAllObjects();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+
+        CCPC.Change();
+        yield return new WaitForSeconds(0.5f);
 
         navi.Shutup();
         ON_OpeningMode.Invoke();
@@ -110,6 +121,7 @@ public class OutSideSwich : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
+        StartCoroutine(openingEvent.OP03());
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
     }
 
@@ -149,7 +161,10 @@ public class OutSideSwich : MonoBehaviour {
 
         navi.DontFollowMe();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+
+        CCPC.Change();
+        yield return new WaitForSeconds(0.5f);
 
         player.position = Title_CamPos.position;
         player.rotation = Title_CamPos.rotation;

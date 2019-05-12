@@ -18,6 +18,13 @@ public class OpeningTutrial : MonoBehaviour {
 
     [SerializeField] GameObject FlashLight;
     [SerializeField] GameObject ObakeBook;
+    [SerializeField] GameObject LightForDebugForAnimation;
+
+    [SerializeField] AudioClip DoorClose;
+    //private AudioSource DoorCloseSource;
+    [SerializeField] AudioClip DoorLock;
+    //private AudioSource DoorLockSource;
+
 
     bool OP02_Can_Start = false;
     [SerializeField] GameObject KeyDropPos;
@@ -26,7 +33,8 @@ public class OpeningTutrial : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+        //DoorLockSource.clip = DoorLock;
+        //DoorCloseSource.clip = DoorClose;
 	}
 	
 	// Update is called once per frame
@@ -125,13 +133,30 @@ public class OpeningTutrial : MonoBehaviour {
 
     public IEnumerator OP03()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
+        /*/Debug.LogWarning(1);
+        DoorCloseSource.Play();
+        yield return new WaitForSeconds(1.5f);
+        
+        Debug.Log(1);
+        DoorLockSource.Play();
 
+        yield return new WaitForSeconds(1f);*/
+
+        Debug.Log(1);
         navi.Comeback();
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
-        navi.Say(OP03_Serif[0]);
+        navi.Say("扉が閉まっちゃった...");
+
+        yield return new WaitForSeconds(1.5f);
+
+        LightForDebugForAnimation.GetComponent<Animator>().SetTrigger("LightEvent");
+
+        yield return new WaitForSeconds(4.5f);
+
+        navi.Say("うわっ！いきなり暗くなったね..");
 
         yield return new WaitForSeconds(3f);
 
@@ -152,7 +177,7 @@ public class OpeningTutrial : MonoBehaviour {
         yield return new WaitForSeconds(3f);
 
         navi.Say(OP03_Serif[3],true);
-        navi.ComebackSilently();
+        navi.GoTo(OP03_Position[1]);
 
         yield break;
 
