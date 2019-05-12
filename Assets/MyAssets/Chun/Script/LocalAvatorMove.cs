@@ -11,7 +11,7 @@ public class LocalAvatorMove : MonoBehaviour {
     [SerializeField]
     private GameObject handright;
     [SerializeField]
-    private GameObject camerarig;
+    private GameObject camerarig;//HMD
     private bool bef_move_sign;
     private bool move_sign;
     private Vector3 befpos;
@@ -19,12 +19,12 @@ public class LocalAvatorMove : MonoBehaviour {
     private Vector2 stickL;
     private Vector3 movestick;
 
-    CharacterController CC;
+    Vector3 defHMDpos;
 
 	// Use this for initialization
 	void Start () {
-        CC = this.GetComponent<CharacterController>();
-    }
+		
+	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -47,11 +47,11 @@ public class LocalAvatorMove : MonoBehaviour {
         befpos = handright.transform.position;
         if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickLeft))
         {
-            this.transform.Rotate(new Vector3(0, -22.5f, 0));
+            transform.RotateAround(camerarig.transform.position,Vector3.up,-22.5f);
         }
         if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickRight))
         {
-            this.transform.Rotate(new Vector3(0, 22.5f, 0));
+            transform.RotateAround(camerarig.transform.position,Vector3.up,22.5f);
         }
         if (!this.GetComponent<CharacterController>().isGrounded)
         {
@@ -65,11 +65,8 @@ public class LocalAvatorMove : MonoBehaviour {
 
     IEnumerator move()
     {
-        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
-        {
-            CC.Move(new Vector3((camerarig.transform.forward * movespeed * Time.deltaTime).x, 0, (camerarig.transform.forward * movespeed * Time.deltaTime).z));
-        }
-
+        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger)) this.GetComponent<CharacterController>().Move(new Vector3((camerarig.transform.forward.normalized * movespeed*Time.deltaTime).x,0, (camerarig.transform.forward.normalized * movespeed * Time.deltaTime).z));
         yield return new WaitForSeconds(0.7f);
     }
+
 }

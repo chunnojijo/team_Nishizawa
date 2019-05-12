@@ -139,6 +139,7 @@ public class Navi : MonoBehaviour {
 
     }
 
+    
     public void GoTo(GameObject Target,bool Follow = false)
     {
         iTween.MoveTo(this.gameObject, Target.transform.position, MoveTime);
@@ -253,7 +254,7 @@ public class Navi : MonoBehaviour {
     {
         Key.SetActive(true);
         Key.transform.position = gameObject.transform.position;
-        iTween.MoveAdd(Key, iTween.Hash("x", -1f, "easeType", iTween.EaseType.easeOutBack, "time", 2f));
+        iTween.MoveAdd(Key, iTween.Hash("z",1f,"y", -1f, "easeType", iTween.EaseType.easeOutBack, "time", 2f));
         //KeyRb.velocity = ( Vector3.up + KeyDropPosition.transform.position - gameObject.transform.position ) * DropSpeed;
     }
 
