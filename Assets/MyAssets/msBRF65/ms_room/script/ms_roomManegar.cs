@@ -22,8 +22,8 @@ public class ms_roomManegar : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        Debug.Log(escape1);
-        Debug.Log(escape2.dieatall);
+        //Debug.Log(escape1);
+        //Debug.Log(escape2.dieatall);
         if (!finish)
         {
             if (navi_pos.GetComponent<start_navi>().collision)
