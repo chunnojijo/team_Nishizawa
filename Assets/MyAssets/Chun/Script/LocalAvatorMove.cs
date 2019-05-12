@@ -70,6 +70,7 @@ public class LocalAvatorMove : MonoBehaviour {
     {
         if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
         {
+            //CC.Move(new Vector3((HMD.transform.forward * movespeed * Time.deltaTime).x, 0f, (HMD.transform.forward * movespeed * Time.deltaTime).z);
             CC.Move(Vector3.ProjectOnPlane(HMD.transform.forward, Vector3.up).normalized * movespeed * Time.deltaTime);
         }
         yield return new WaitForSeconds(0.7f);
