@@ -21,9 +21,9 @@ public class OpeningTutrial : MonoBehaviour {
     [SerializeField] GameObject LightForDebugForAnimation;
 
     [SerializeField] AudioClip DoorClose;
-    private AudioSource DoorCloseSource;
+    //private AudioSource DoorCloseSource;
     [SerializeField] AudioClip DoorLock;
-    private AudioSource DoorLockSource;
+    //private AudioSource DoorLockSource;
 
 
     bool OP02_Can_Start = false;
@@ -33,8 +33,8 @@ public class OpeningTutrial : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        DoorLockSource.clip = DoorLock;
-        DoorCloseSource.clip = DoorClose;
+        //DoorLockSource.clip = DoorLock;
+        //DoorCloseSource.clip = DoorClose;
 	}
 	
 	// Update is called once per frame
