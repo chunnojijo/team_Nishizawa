@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LocalAvatorMove : MonoBehaviour {
+public class LocalAvatorMoveMayFes : MonoBehaviour
+{
+    [SerializeField] bool IsDebugging;
+    [Space(10)]
+
     public float movespeedcontroller;
     [SerializeField]
-    private float controllermovevalue=3;
+    private float controllermovevalue = 3;
     [SerializeField]
     private float movespeed;
     [SerializeField]
@@ -21,13 +25,15 @@ public class LocalAvatorMove : MonoBehaviour {
 
     CharacterController CC;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         CC = this.GetComponent<CharacterController>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
 
         move_sign = (handright.transform.position - befpos).y > 0;
         controllermove += (handright.transform.position - befpos).y;
@@ -36,14 +42,14 @@ public class LocalAvatorMove : MonoBehaviour {
             controllermove = 0;
         }
 
-        if (controllermove > controllermovevalue||controllermove<-controllermovevalue)
+        if (controllermove > controllermovevalue || controllermove < -controllermovevalue)
         {
             StartCoroutine("move");
         }
-        
 
 
-        bef_move_sign =move_sign;
+
+        bef_move_sign = move_sign;
         befpos = handright.transform.position;
         if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickLeft))
         {
@@ -60,7 +66,7 @@ public class LocalAvatorMove : MonoBehaviour {
         stickL = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick);
         Debug.Log(stickL.x + stickL.y);
         movestick = (stickL.y * camerarig.transform.forward.normalized + stickL.x * camerarig.transform.right.normalized) * movespeedcontroller;
-        this.GetComponent<CharacterController>().Move(movestick*Time.deltaTime);
+        this.GetComponent<CharacterController>().Move(movestick * Time.deltaTime);
     }
 
     IEnumerator move()
