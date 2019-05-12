@@ -20,6 +20,8 @@ public class ms_roomManegar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        Debug.Log(escape1);
+        Debug.Log(escape2.dieatall);
         if (!finish)
         {
             if (escape1.dieatall == true)

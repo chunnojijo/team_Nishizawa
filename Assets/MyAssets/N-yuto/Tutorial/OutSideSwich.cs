@@ -62,7 +62,7 @@ public class OutSideSwich : MonoBehaviour {
     {
 
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark, 0.5f);
-
+        GrabRelease.ReleaseAllObjects();
         yield return new WaitForSeconds(1f);
 
         navi.Shutup();
@@ -91,6 +91,7 @@ public class OutSideSwich : MonoBehaviour {
     public IEnumerator GoInside()
     {
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark, 0.5f);
+        GrabRelease.ReleaseAllObjects();
 
         yield return new WaitForSeconds(1f);
 
@@ -115,6 +116,7 @@ public class OutSideSwich : MonoBehaviour {
     public IEnumerator Ending()
     {
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark, 0.5f);
+        GrabRelease.ReleaseAllObjects();
 
         yield return new WaitForSeconds(1f);
 
@@ -143,6 +145,7 @@ public class OutSideSwich : MonoBehaviour {
     public IEnumerator Title()
     {
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark, 0.5f);
+        GrabRelease.ReleaseAllObjects();
 
         navi.DontFollowMe();
 

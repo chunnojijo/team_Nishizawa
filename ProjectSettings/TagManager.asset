@@ -11,6 +11,11 @@ TagManager:
   - Key
   - Torch
   - PlayerHand
+  - image
+  - Standard
+  - Hand
+  - Drawer
+  - Stopper
   layers:
   - Default
   - TransparentFX
@@ -21,9 +26,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
-  - 
-  - 
+  - RoomBorder
+  - Player
+  - LightException
   - 
   - 
   - 

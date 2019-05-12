@@ -162,6 +162,10 @@ public class OpeningTutrial : MonoBehaviour {
     {
         StartCoroutine(OP03());
     }
+    public void OP04_Invoke()
+    {
+        StartCoroutine(OP04());
+    }
 
     public IEnumerator OP04()
     {
@@ -187,5 +191,7 @@ public class OpeningTutrial : MonoBehaviour {
 
         yield break;
     }
+
+
 
 }
