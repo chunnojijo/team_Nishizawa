@@ -35,6 +35,6 @@ public class CharaConPosChange : MonoBehaviour {
 	public void Change(){
         Vector3 localPos = this.transform.InverseTransformPoint(HMD.transform.position);
         //Debug.Log(localPos + "<-local world->" + HMD.transform.position);
-		CC.center =new Vector3(localPos.x,CC.center.y,localPos.z);
+		//CC.center = new Vector3(localPos.x,CC.center.y,localPos.z);
 	}
 }
