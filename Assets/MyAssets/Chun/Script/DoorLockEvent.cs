@@ -5,7 +5,7 @@ using UnityEngine;
 public class DoorLockEvent : MonoBehaviour {
 
     [SerializeField] private GameObject Door;
-    private bool first=true;
+    //private bool first=true;
 
 	// Use this for initialization
 	void Start () {
@@ -19,12 +19,18 @@ public class DoorLockEvent : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player"&&first)
+        if (other.tag == "Player"/*&&first*/)
         {
 
             Door.GetComponent<Animator>().SetTrigger("DoorClose");
-            this.GetComponent<AudioSource>().Play();
-            first=false;
+            Door.GetComponent<AudioSource>().Play();
+            
+            DoorLockEvent[] doorLockEvents = transform.parent.GetComponentsInChildren<DoorLockEvent>();
+            foreach(DoorLockEvent o in doorLockEvents){
+                o.gameObject.SetActive(false);
+            }
+            
+            //first=false;
         }
     }
 }

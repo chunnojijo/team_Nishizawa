@@ -38,30 +38,24 @@ public class OutSideSwich : MonoBehaviour {
         CCPC = player.GetComponent<CharaConPosChange>();
 	}
 
-    [ContextMenu("OP")]
-    private void OPevInvoke()
-    {
-        ON_OpeningMode.Invoke();
-    }
-
     // Update is called once per frame
     void Update () {
 
         if (Input.GetKeyDown("o") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
-            StartCoroutine(Opening());
+            Opening_Invoke();
         }
         if (Input.GetKeyDown("i") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
-            StartCoroutine(GoInside());
+            GoInside_Invoke();
         }
         if (Input.GetKeyDown("e") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
-            StartCoroutine(Ending());
+            Ending_Invoke();
         }
         if (Input.GetKeyDown("t") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
-            StartCoroutine(Title());
+            Title_Invoke();
         }
 
     }
@@ -183,19 +177,51 @@ public class OutSideSwich : MonoBehaviour {
 
     public void GoInside_Invoke()
     {
+        StopAllCoroutinesAndTutrials();
         StartCoroutine(GoInside());
     }
     public void Opening_Invoke()
     {
+        StopAllCoroutinesAndTutrials();
         StartCoroutine(Opening());
     }
     public void Ending_Invoke()
     {
+        StopAllCoroutinesAndTutrials();
         StartCoroutine(Ending());
     }
     public void Title_Invoke()
     {
+        StopAllCoroutinesAndTutrials();
         StartCoroutine(Title());
+    }
+
+    public void StopAllCoroutinesAndTutrials()
+    {
+        StopAllCoroutines();
+        openingEvent.StopAllCoroutines();
+        endingEvent.StopAllCoroutines();
+    }
+
+    [ContextMenu("OP")]
+    private void OPevInvoke()
+    {
+        ON_OpeningMode.Invoke();
+    }
+    [ContextMenu("ED")]
+    private void EDevInvoke()
+    {
+        ON_EndingMode.Invoke();
+    }
+    [ContextMenu("OFF")]
+    private void OFFevInvoke()
+    {
+        OFF.Invoke();
+    }
+    [ContextMenu("Title")]
+    private void TTevInvoke()
+    {
+        OFF_TitleMode.Invoke();
     }
 
 }

@@ -16,6 +16,7 @@ TagManager:
   - Hand
   - Drawer
   - Stopper
+  - Heart
   layers:
   - Default
   - TransparentFX
