@@ -47,6 +47,7 @@ public class Escape : MonoBehaviour {
     private float[] distancefromobj;
     private float distancefromobjmax=3;
     private float angle;
+    private float DamagingSpeedDefault;
     private Vector3 changeObject_firstscale;
     private OVRHapticsClip hapticsClip;
     [SerializeField]
@@ -72,6 +73,7 @@ public class Escape : MonoBehaviour {
     private GameObject SliderFill;
 
     void Start () {
+        DamagingSpeedDefault = damagingspeed;
         audiosource = this.GetComponents<AudioSource>();
         particlesystem = this.GetComponentsInChildren<ParticleSystem>();
         GetComponent<MeshRenderer>().enabled = false;
@@ -96,6 +98,9 @@ public class Escape : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
+        if (damage) damagingspeed = DamagingSpeedDefault;
+        else damagingspeed = 1;
         //For Debug
         if (Input.GetKeyDown(KeyCode.A)) appear = true;
         if (Input.GetKeyDown(KeyCode.E)) escape = true;
@@ -314,18 +319,18 @@ public class Escape : MonoBehaviour {
 
                 //目的方向へ回転
                 Debug.DrawRay(around[maxdirection].origin, around[maxdirection].direction, Color.red);
-                if (rotationmove && !damage)
+                if (rotationmove /*&& !damage*/)
                 {
                     if (angle > 0)
                     {
-                        angle -= Rotatemovespeed;
-                        parent.transform.Rotate(new Vector3(0, Rotatemovespeed, 0));
+                        angle -= Rotatemovespeed*damagingspeed;
+                        parent.transform.Rotate(new Vector3(0, Rotatemovespeed*damagingspeed, 0));
                         //Debug.Log("angle=" + angle);
                     }
                     if (angle <= 0)
                     {
-                        angle += Rotatemovespeed;
-                        parent.transform.Rotate(new Vector3(0, -Rotatemovespeed, 0));
+                        angle += Rotatemovespeed*damagingspeed;
+                        parent.transform.Rotate(new Vector3(0, -Rotatemovespeed*damagingspeed, 0));
                         //Debug.Log("angle=" + angle);
                     }
                     if (angle < Rotatemovespeed * 2 && -Rotatemovespeed * 2 < angle)
@@ -355,7 +360,7 @@ public class Escape : MonoBehaviour {
 
                 //動いた後プレイヤーの角度を計算
 
-                if (aftermove && !damage)
+                if (aftermove /*&& !damage*/)
                 {
                     //動いた後プレイヤーの角度を計算
                     if (aftermovefirst)
@@ -367,14 +372,14 @@ public class Escape : MonoBehaviour {
                     //プレイヤーの向きへ回転
                     if (angle > 0)
                     {
-                        angle -= Rotatemovespeed;
-                        parent.transform.Rotate(new Vector3(0, Rotatemovespeed, 0));
+                        angle -= Rotatemovespeed*damagingspeed;
+                        parent.transform.Rotate(new Vector3(0, Rotatemovespeed*damagingspeed, 0));
                         //Debug.Log("angle=" + angle);
                     }
                     if (angle <= 0)
                     {
-                        angle += Rotatemovespeed;
-                        parent.transform.Rotate(new Vector3(0, -Rotatemovespeed, 0));
+                        angle += Rotatemovespeed*damagingspeed;
+                        parent.transform.Rotate(new Vector3(0, -Rotatemovespeed*damagingspeed, 0));
                         //Debug.Log("angle=" + angle);
                     }
                     if (angle < Rotatemovespeed * 2 && -Rotatemovespeed * 2 < angle)
@@ -395,7 +400,7 @@ public class Escape : MonoBehaviour {
             }
             else
             {
-                if (!damage)
+                if (/*!damage*/true)
                 {
                     escapefirst = true;
                     aftermovefirst = true;
