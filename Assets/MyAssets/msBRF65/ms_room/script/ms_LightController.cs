@@ -7,14 +7,17 @@ public class ms_LightController : MonoBehaviour {
     private bool lock_light = true;
     public bool finish_color = false;
     public GameObject shadow_light,player,image;
-    float lighted_time, distance = 3f, color = 255f;
-    public float color_speed = 10f;
+    //playerをlightに変換する
+    float lighted_time, distance = 3f, color = 255f, speed;
+    public float color_speed = 10f,image_length;
     Ray player_ray;
     RaycastHit hit;
 
 	// Use this for initialization
 	void Start () {
         //this.gameObject.SetActive(false);
+        image_length = image.transform.localScale.z;
+        speed = image_length * Time.deltaTime/3f;
 	}
 	
 	// Update is called once per frame
@@ -29,6 +32,7 @@ public class ms_LightController : MonoBehaviour {
             //Rayが当たったオブジェクトのtagがimageだったら
             if (hit.collider.tag == "image" && !finish_color)
             {
+                /*
                 color -= Time.deltaTime * color_speed;
                 if (color < 0f)
                 {
@@ -38,6 +42,18 @@ public class ms_LightController : MonoBehaviour {
                 }
                 Debug.Log(image.GetComponent<Renderer>().material.color);
                 image.GetComponent<Renderer>().material.color = new Color(color, 255f, 255f);
+                */
+                //color_speedの時間で終わる
+                if (image.transform.position.z > speed)
+                {
+                    image.transform.localScale -= new Vector3(0f,0f,image.transform.localScale.z);
+                    finish_color = true;
+                    shadow_light.SetActive(true);
+                }
+                else{
+                    image.transform.localScale -= new Vector3(0f,0f,speed);
+                    image.transform.position -= new Vector3(0f,0f,speed/2);
+                }
             }
         }
     }
