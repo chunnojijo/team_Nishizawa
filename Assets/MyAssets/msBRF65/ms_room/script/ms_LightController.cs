@@ -17,13 +17,13 @@ public class ms_LightController : MonoBehaviour {
 	void Start () {
         //this.gameObject.SetActive(false);
         image_length = image.transform.localScale.z;
-        speed = image_length * Time.deltaTime/3f;
+        speed = image_length * Time.deltaTime/10f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
         player_ray = new Ray(player.transform.position, player.transform.forward);
-
+        /*
         if (Physics.Raycast(player_ray, out hit, distance) && image.activeSelf)
         {
             //Debug.LogWarning(hit.transform.name);
@@ -31,7 +31,7 @@ public class ms_LightController : MonoBehaviour {
             
             //Rayが当たったオブジェクトのtagがimageだったら
             if (hit.collider.tag == "image" && !finish_color)
-            {
+            { */
                 /*
                 color -= Time.deltaTime * color_speed;
                 if (color < 0f)
@@ -44,18 +44,20 @@ public class ms_LightController : MonoBehaviour {
                 image.GetComponent<Renderer>().material.color = new Color(color, 255f, 255f);
                 */
                 //color_speedの時間で終わる
-                if (image.transform.position.z > speed)
-                {
-                    image.transform.localScale -= new Vector3(0f,0f,image.transform.localScale.z);
-                    finish_color = true;
-                    shadow_light.SetActive(true);
+                if(!finish_color){
+                    if (image.transform.localScale.z < speed)
+                    {
+                        image.transform.localScale -= new Vector3(0f,0f,image.transform.localScale.z);
+                        finish_color = true;
+                        shadow_light.SetActive(true);
+                    }
+                    else{
+                        image.transform.localScale -= new Vector3(0f,0f,speed);
+                        image.transform.position += new Vector3(0f,5f*speed/2,0f);
+                    }
                 }
-                else{
-                    image.transform.localScale -= new Vector3(0f,0f,speed);
-                    image.transform.position -= new Vector3(0f,0f,speed/2);
-                }
-            }
-        }
+            /*}
+        }*/
     }
 
 }
