@@ -20,11 +20,15 @@ public class KeyController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Debug.Log(Vector3.Distance(player.transform.position, this.transform.position));
+        if( Vector3.Distance(player.transform.position , this.transform.position) < key_player_direction){
+            Debug.LogWarning("Nearaaaaaaaaaaaaaaaaa");
+        }
         if(ms_room.finish == true && !finish_key_animation && Vector3.Distance(player.transform.position , this.transform.position) < key_player_direction && ms_light_c.finish_color)
         {
             key.gameObject.SetActive(true);
             finish_key_animation = true;
             fall_key();
+            Debug.LogWarning("KeyDown");
         }
         if (key.transform.position.z <= key_pos_z)
         {

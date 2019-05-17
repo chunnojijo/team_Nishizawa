@@ -7,6 +7,8 @@ public class Sample : MonoBehaviour {
     public float theta=60.0f;
     public float lightdistance=200.0f;
     public GameObject[] Objects;
+    private GameObject[] AllGameObject;
+    private GameObject[] NotRegistedObject;
     [HideInInspector] public GameObject[] damagesc;
     public GameObject camerarig;
     
@@ -34,6 +36,17 @@ public class Sample : MonoBehaviour {
     // Use this for initialization
     void Start () {
         damagesc = new GameObject[Objects.Length];
+        
+        /*
+        foreach (GameObject obj in UnityEngine.Object.FindObjectsOfType(typeof(GameObject)))
+        {
+            // シーン上に存在するオブジェクトならば処理.
+            if (obj.activeInHierarchy)
+            {
+                // GameObjectの名前を表示.
+                Debug.Log(obj.name);
+            }
+        }*/
 
         for(int i = 0;i < Objects.Length; i++)
         {
@@ -69,7 +82,15 @@ public class Sample : MonoBehaviour {
                 damagesc[i].GetComponent<Escape>().damage = false;
             }
 
+            
+
         }
+
+            
+
+        }
+
+
         
 	}
-}
+

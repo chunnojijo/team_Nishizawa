@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AuraAPI;
 
 public class EndingTutrial : MonoBehaviour {
 
@@ -10,13 +11,17 @@ public class EndingTutrial : MonoBehaviour {
 
     [SerializeField] Navi navi;
 
+    [SerializeField] GameObject Lastpos;
+
     bool ED02_Can_Start = false;
 
-    bool SunRising = false;
+    public bool SunRising = false;
     [SerializeField] Light Sun;
 
     float Duration = 0f;
     [SerializeField] Material skyMat;
+
+    [SerializeField] Camera camera;
 
     // Use this for initialization
     void Start () {
@@ -29,14 +34,16 @@ public class EndingTutrial : MonoBehaviour {
 
         if (SunRising)
         {
-            Duration += Time.deltaTime / 3f;
+            Duration += Time.deltaTime / 60f;
             if (Duration >= 1f)
             {
                 Duration = 1f;
                 SunRising = false; Debug.Log("FinishSunRise");
             }
 
-            Sun.intensity = Duration * 8f;
+            //Sun.intensity = Duration * 8f;
+            Sun.gameObject.GetComponent<Animator>().SetTrigger("SunRise");
+            
             skyMat.SetFloat("_Blend", Duration);
         }
 	}
@@ -44,6 +51,7 @@ public class EndingTutrial : MonoBehaviour {
 
     public IEnumerator ED01()
     {
+        Sun.GetComponent<Animator>().SetTrigger("FirstCondition");
         navi.Comeback();
 
         yield return new WaitForSeconds(1f);
@@ -95,12 +103,13 @@ public class EndingTutrial : MonoBehaviour {
 
         SunRising = true;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         navi.LookAt(Sun.gameObject);
         navi.Say(ED02_Serif[2]);
+        navi.GoTo(Lastpos.transform.position);
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(20f);
 
         navi.LookMe();
         navi.Say(ED02_Serif[3]);

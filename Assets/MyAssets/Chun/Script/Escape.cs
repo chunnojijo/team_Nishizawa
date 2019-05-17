@@ -93,6 +93,9 @@ public class Escape : MonoBehaviour {
 
         SliderBackGround = gameObject.transform.parent.Find("Canvas/Slider/Background").gameObject;
         SliderFill = gameObject.transform.parent.Find("Canvas/Slider/Fill Area/Fill").gameObject;
+        if(player==null){
+            player=GameObject.Find("LocalAvatar");
+        }
     }
 	
 

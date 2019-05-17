@@ -14,7 +14,7 @@ public class LightTorch : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (time > 3)
+        if (time > 1)
         {
             torch.GetComponent<Torchelight>().IntensityLight = 0.2f;
         }
