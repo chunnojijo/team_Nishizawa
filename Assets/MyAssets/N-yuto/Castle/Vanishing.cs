@@ -106,9 +106,9 @@ public class Vanishing : MonoBehaviour {
                 }
 
             }else
-                {
-                    StopDamage();
-                }
+            {
+                StopDamage();
+            }
             
 
         }
@@ -186,7 +186,7 @@ public class Vanishing : MonoBehaviour {
         HPSlider.gameObject.SetActive(true);
         iTween.ShakeRotation(gameObject, Vector3.one * 0.05f, 5f);
         DamageParticle.Play();
-        IsDamaging = true;       
+        IsDamaging = true;
     }
 
     void StopDamage()
