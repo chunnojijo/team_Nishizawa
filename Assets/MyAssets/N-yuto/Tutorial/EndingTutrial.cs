@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AuraAPI;
 
 public class EndingTutrial : MonoBehaviour {
 
@@ -12,11 +13,13 @@ public class EndingTutrial : MonoBehaviour {
 
     bool ED02_Can_Start = false;
 
-    bool SunRising = false;
+    public bool SunRising = false;
     [SerializeField] Light Sun;
 
     float Duration = 0f;
     [SerializeField] Material skyMat;
+
+    [SerializeField] Camera camera;
 
     // Use this for initialization
     void Start () {
@@ -29,14 +32,16 @@ public class EndingTutrial : MonoBehaviour {
 
         if (SunRising)
         {
-            Duration += Time.deltaTime / 3f;
+            Duration += Time.deltaTime / 30f;
             if (Duration >= 1f)
             {
                 Duration = 1f;
                 SunRising = false; Debug.Log("FinishSunRise");
             }
 
-            Sun.intensity = Duration * 8f;
+            //Sun.intensity = Duration * 8f;
+            Sun.gameObject.GetComponent<Animator>().SetTrigger("SunRise");
+            
             skyMat.SetFloat("_Blend", Duration);
         }
 	}
