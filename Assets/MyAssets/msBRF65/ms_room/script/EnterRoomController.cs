@@ -14,7 +14,7 @@ public class EnterRoomController : MonoBehaviour {
 	void Update () {
 
 	}
-    void OnTriggerEnter(Collision Other)
+    void OnTriggerEnter(Collider Other)
     {
         if (Other.gameObject.tag == "player")
         {
