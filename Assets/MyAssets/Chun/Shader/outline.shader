@@ -31,7 +31,7 @@
             };
 
 			
-		fixed4 _OutLineColor;
+			fixed4 _OutLineColor;
 
             v2f vert (appdata v)
             {
@@ -42,53 +42,56 @@
             }
             
             fixed4 frag (v2f i) : SV_Target
-            {
-                fixed4 col = fixed4(0.1,0.1,0.1,1);                
-                return col;
+            {             
+                return _OutLineColor;
             }
             ENDCG
         }
 
         Pass
         {
-            Cull Back
+			Cull Back
+           Tags { "Queue"="Transparent" }
+		LOD 200
 
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
+		CGPROGRAM
+		// Physically based Standard lighting model, and enable shadows on all light types
+		#pragma surface surf Standard alpha:fade
 
-            #include "UnityCG.cginc"
+		// Use shader model 3.0 target, to get nicer looking lighting
+		#pragma target 3.0
 
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
-            };
+		sampler2D _MainTex;
 
-            struct v2f
-            {
-                float4 vertex : SV_POSITION;
-                float3 normal : NORMAL;
-            };
+		struct Input {
+			float2 uv_MainTex;
+		};
 
-            v2f vert (appdata v)
-            {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.normal = UnityObjectToWorldNormal(v.normal);
-                return o;
-            }
-            
-            fixed4 frag (v2f i) : SV_Target
-            {                
-                half nl = max(0, dot(i.normal, _WorldSpaceLightPos0.xyz));
-                if( nl <= 0.01f ) nl = 0.1f;
-                else if( nl <= 0.3f ) nl = 0.3f;
-                else nl = 1.0f;
-                fixed4 col = fixed4(nl, nl, nl, 1);
-                return col;
-            }
-            ENDCG
-        }
+		half _Glossiness;
+		half _Metallic;
+		half _Alpha;
+		half _Intensity;
+		fixed4 _Color;
+		fixed4 _EmissionColor;
+
+		// Add instancing support for this shader. You need to check 'Enable Instancing' on materials that use the shader.
+		// See https://docs.unity3d.com/Manual/GPUInstancing.html for more information about instancing.
+		// #pragma instancing_options assumeuniformscaling
+		//UNITY_INSTANCING_BUFFER_START(Props)
+			// put more per-instance properties here
+		//UNITY_INSTANCING_BUFFER_END(Props)
+
+		void surf (Input IN, inout SurfaceOutputStandard o) {
+			// Albedo comes from a texture tinted by color
+			//fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
+			o.Albedo = _Color.rgb;
+			// Metallic and smoothness come from slider variables
+			//o.Metallic = _Metallic;
+			//o.Smoothness = _Glossiness;
+			o.Alpha = _Alpha;
+			o.Emission = _EmissionColor * _Intensity;
+		}
+		ENDCG
+	}
     }
 }

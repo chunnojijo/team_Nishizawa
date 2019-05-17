@@ -43,6 +43,9 @@ public class Vanishing : MonoBehaviour {
     [Space(1)]
     [SerializeField] ParticleSystem DamageParticle;
     [SerializeField] Slider HPSlider;
+    AudioSource audio;
+    private OVRHapticsClip hapticsClip;
+
 
 
     // Use this for initialization
@@ -52,6 +55,9 @@ public class Vanishing : MonoBehaviour {
         Invoke("Can", 3f);
         DefRot = gameObject.transform.rotation;
         HPSlider.maxValue = HP;
+        audio = GetComponent<AudioSource>();
+        byte[] samples = new byte[8]{128,128,128,128,128,128,128,128};
+        hapticsClip = new OVRHapticsClip(samples, samples.Length);
 
     }
 
@@ -74,13 +80,14 @@ public class Vanishing : MonoBehaviour {
         if (exists && canVanish)
         {
 
-            ray = new Ray(light.position, heartPos.position - light.position);
-            if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(light.forward.normalized, ray.direction.normalized) > 0.9f))
+            ray = new Ray(light.position, light.forward);
+            Debug.DrawRay(ray.origin,ray.direction,Color.red);
+            if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(heartPos.position - light.position, ray.direction) > 0.95f))
             {
-                Debug.Log("Find");
+                Debug.LogWarning("Find" + " dot = " + Vector3.Dot(light.up, ray.direction));
 
                 //damagesc[i].GetComponent<Escape>().damage = true;
-                if (hit.transform.tag == heartPos.tag)
+                if (hit.transform.tag == "Heart")
                 {
                     if(HP <= 0f) {
                           Vanish();
@@ -93,13 +100,16 @@ public class Vanishing : MonoBehaviour {
 
                     }
 
+                }else
+                {
+                    StopDamage();
                 }
 
-            }
-            else
-            {
-                StopDamage();
-            }
+            }else
+                {
+                    StopDamage();
+                }
+            
 
         }
 
@@ -108,6 +118,8 @@ public class Vanishing : MonoBehaviour {
             HP -= Time.deltaTime;
             HPSlider.value = HP;
             Debug.Log(HP);
+            OVRHaptics.LeftChannel.Mix(hapticsClip);
+
         }
 
 
@@ -160,7 +172,7 @@ public class Vanishing : MonoBehaviour {
         GhostsParticles.SetActive(true);
         SmokeParticles.SetActive(true);
         endingTutrial.ED02_GetReady();
-
+        audio.PlayDelayed(5.5f);
     }
 
     void Can()
@@ -172,7 +184,7 @@ public class Vanishing : MonoBehaviour {
     {
         if (IsDamaging) { return; }
         HPSlider.gameObject.SetActive(true);
-        iTween.ShakeRotation(gameObject, new Vector3(1, 1, 1), 5f);
+        iTween.ShakeRotation(gameObject, Vector3.one * 0.05f, 5f);
         DamageParticle.Play();
         IsDamaging = true;       
     }

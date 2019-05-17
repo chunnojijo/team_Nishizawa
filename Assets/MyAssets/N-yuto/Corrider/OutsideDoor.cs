@@ -26,6 +26,7 @@ public class OutsideDoor : MonoBehaviour
     }
 
     // Update is called once per frame
+/*
     void Update()
     {
        if (Input.GetKeyDown(KeyCode.K) && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
@@ -34,7 +35,7 @@ public class OutsideDoor : MonoBehaviour
         }
 
 
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {

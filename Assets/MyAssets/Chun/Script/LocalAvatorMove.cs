@@ -48,11 +48,11 @@ public class LocalAvatorMove : MonoBehaviour {
         befpos = handright.transform.position;
         if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickLeft))
         {
-            transform.RotateAround(this.transform.position + CC.center,Vector3.up,-22.5f);
+            transform.RotateAround(transform.TransformPoint(CC.center),Vector3.up,-22.5f);
         }
         if (OVRInput.GetDown(OVRInput.RawButton.RThumbstickRight))
         {
-            transform.RotateAround(this.transform.position + CC.center, Vector3.up,22.5f);
+            transform.RotateAround(transform.TransformPoint(CC.center), Vector3.up,22.5f);
         }
         if (!CC.isGrounded)
         {
@@ -61,7 +61,10 @@ public class LocalAvatorMove : MonoBehaviour {
         stickL = OVRInput.Get(OVRInput.RawAxis2D.LThumbstick);
         Debug.Log(stickL.x + stickL.y);
         movestick = (stickL.y * HMD.transform.forward + stickL.x * HMD.transform.right) * movespeedcontroller;
-        CC.Move(movestick*Time.deltaTime);
+        //CC.Move(movestick*Time.deltaTime);
+        Quaternion rot = Quaternion.FromToRotation(Vector3.forward, Vector3.ProjectOnPlane(HMD.transform.forward,Vector3.up));
+        Vector3 mv = new Vector3(stickL.x,0,stickL.y);
+        CC.Move(rot * mv * movespeedcontroller * Time.deltaTime);
     }
 
 

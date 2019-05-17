@@ -20,10 +20,8 @@ public class OpeningTutrial : MonoBehaviour {
     [SerializeField] GameObject ObakeBook;
     [SerializeField] GameObject LightForDebugForAnimation;
 
-    [SerializeField] AudioClip DoorClose;
-    //private AudioSource DoorCloseSource;
-    [SerializeField] AudioClip DoorLock;
-    //private AudioSource DoorLockSource;
+    [SerializeField] AudioSource DoorCloseSource;
+    [SerializeField] AudioSource DoorLockSource;
 
 
     bool OP02_Can_Start = false;
@@ -133,32 +131,37 @@ public class OpeningTutrial : MonoBehaviour {
 
     public IEnumerator OP03()
     {
-        yield return new WaitForSeconds(2f);
-        /*/Debug.LogWarning(1);
+        yield return new WaitForSeconds(0.1f);
+
+        //DoorCloseSource.Play();
+        navi.ComebackSilently();
+
         DoorCloseSource.Play();
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         
-        Debug.Log(1);
         DoorLockSource.Play();
-
-        yield return new WaitForSeconds(1f);*/
-
-        Debug.Log(1);
-        navi.Comeback();
 
         yield return new WaitForSeconds(1f);
 
-        navi.Say("扉が閉まっちゃった...");
+        navi.Say("ガチャ？");
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
+
+        navi.Say("ってもしかして");
+
+        yield return new WaitForSeconds(2f);
+
+        navi.Say("閉じ込められちゃった！",true);
+
+        yield return new WaitForSeconds(0.5f);
 
         LightForDebugForAnimation.GetComponent<Animator>().SetTrigger("LightEvent");
 
         yield return new WaitForSeconds(4.5f);
 
-        navi.Say("うわっ！いきなり暗くなったね..");
+        navi.Say("うわっ！真っ暗っ！",true);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         navi.Say(OP03_Serif[1]);
 
@@ -172,7 +175,8 @@ public class OpeningTutrial : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
-        navi.Say(OP03_Serif[2]);
+        navi.Comeback();
+        navi.Say("これで大丈夫！");
 
         yield return new WaitForSeconds(3f);
 
