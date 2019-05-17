@@ -23,7 +23,7 @@ public class ms_LightController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         player_ray = new Ray(player.transform.position, player.transform.forward);
-        /*
+        
         if (Physics.Raycast(player_ray, out hit, distance) && image.activeSelf)
         {
             //Debug.LogWarning(hit.transform.name);
@@ -31,7 +31,7 @@ public class ms_LightController : MonoBehaviour {
             
             //Rayが当たったオブジェクトのtagがimageだったら
             if (hit.collider.tag == "image" && !finish_color)
-            { */
+            { 
                 /*
                 color -= Time.deltaTime * color_speed;
                 if (color < 0f)
@@ -56,8 +56,8 @@ public class ms_LightController : MonoBehaviour {
                         image.transform.position += new Vector3(0f,5f*speed/2,0f);
                     }
                 }
-            /*}
-        }*/
+            }
+        }
     }
 
 }

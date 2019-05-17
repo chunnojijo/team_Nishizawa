@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ms_roomManegar : MonoBehaviour {
     public bool finish =false;
-    public GameObject obake1,obake2,donuts,cookies,ms_light_plane,key,navi,navi_pos,ms_light;
+    public GameObject obake1,obake2,donuts,cookies,ms_light_plane,key,navi,navi_pos,navi_pos1,navi_pos2,ms_light;
     Escape escape1, escape2;
     Navi navi_s;
+    bool flag1 = true, flag2 = true, flag3 = true;
 
 	// Use this for initialization
 	void Start () {
@@ -26,9 +27,10 @@ public class ms_roomManegar : MonoBehaviour {
         //Debug.Log(escape2.dieatall);
         if (!finish)
         {
-            if (navi_pos.GetComponent<start_navi>().collision)
+            if (navi_pos.GetComponent<start_navi>().collision && flag1)
             {
                 StartCoroutine("first_serif");
+                flag1 = false;
             }
             if (escape1.dieatall == true)
             {
@@ -38,14 +40,16 @@ public class ms_roomManegar : MonoBehaviour {
             {
                 cookies.SetActive(true);
             }
-            if (escape1.dieatall && escape2.dieatall)
+            if (escape1.dieatall && escape2.dieatall && flag2)
             {
                 ms_light_plane.gameObject.SetActive(true);
                 StartCoroutine("hint");
+                flag2 = false;
             }
-            if (ms_light.GetComponent<ms_LightController>().finish_color)
+            if (ms_light.GetComponent<ms_LightController>().finish_color && flag3)
             {
                 StartCoroutine("hint_getkey");
+                flag3 = false;
             }
         }
     }
@@ -64,6 +68,8 @@ public class ms_roomManegar : MonoBehaviour {
     IEnumerator hint()
     {
         yield return new WaitForSeconds(3f);
+        navi_s.GoTo(navi_pos1.transform.position);
+        yield return new WaitForSeconds(3f);
         navi_s.Say("鍵を手に入れないと、出れないよ！");
         yield return new WaitForSeconds(3f);
         navi_s.Say("あそこにあるChargeの文字は何だろう？？");
@@ -71,6 +77,8 @@ public class ms_roomManegar : MonoBehaviour {
     }
     IEnumerator hint_getkey()
     {
+        yield return new WaitForSeconds(3f);
+        navi_s.GoTo(navi_pos2.transform.position);
         yield return new WaitForSeconds(3f);
         navi_s.Say("鍵の影が出てきたね！");
         yield return new WaitForSeconds(3f);
