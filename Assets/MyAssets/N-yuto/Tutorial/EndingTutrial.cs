@@ -11,6 +11,8 @@ public class EndingTutrial : MonoBehaviour {
 
     [SerializeField] Navi navi;
 
+    [SerializeField] GameObject Lastpos;
+
     bool ED02_Can_Start = false;
 
     public bool SunRising = false;
@@ -32,7 +34,7 @@ public class EndingTutrial : MonoBehaviour {
 
         if (SunRising)
         {
-            Duration += Time.deltaTime / 30f;
+            Duration += Time.deltaTime / 60f;
             if (Duration >= 1f)
             {
                 Duration = 1f;
@@ -101,12 +103,13 @@ public class EndingTutrial : MonoBehaviour {
 
         SunRising = true;
 
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         navi.LookAt(Sun.gameObject);
         navi.Say(ED02_Serif[2]);
+        navi.GoTo(Lastpos.transform.position);
 
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(30f);
 
         navi.LookMe();
         navi.Say(ED02_Serif[3]);
