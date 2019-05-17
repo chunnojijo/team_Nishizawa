@@ -84,7 +84,7 @@ public class Vanishing : MonoBehaviour {
             Debug.DrawRay(ray.origin,ray.direction,Color.red);
             if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(heartPos.position - light.position, ray.direction) > 0.95f))
             {
-                Debug.LogWarning("Find" + " dot = " + Vector3.Dot(light.up, ray.direction));
+                //Debug.LogWarning("Find" + " dot = " + Vector3.Dot(light.up, ray.direction));
 
                 //damagesc[i].GetComponent<Escape>().damage = true;
                 if (hit.transform.tag == "Heart")

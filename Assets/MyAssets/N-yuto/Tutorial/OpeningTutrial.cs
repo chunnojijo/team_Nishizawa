@@ -136,7 +136,7 @@ public class OpeningTutrial : MonoBehaviour {
         //DoorCloseSource.Play();
         navi.ComebackSilently();
 
-        DoorCloseSource.Play();
+        //DoorCloseSource.Play();
         yield return new WaitForSeconds(1f);
         
         DoorLockSource.Play();
