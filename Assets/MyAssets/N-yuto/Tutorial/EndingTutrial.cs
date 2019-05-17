@@ -49,6 +49,7 @@ public class EndingTutrial : MonoBehaviour {
 
     public IEnumerator ED01()
     {
+        Sun.GetComponent<Animator>().SetTrigger("FirstCondition");
         navi.Comeback();
 
         yield return new WaitForSeconds(1f);

@@ -37,6 +37,7 @@ public class Sample : MonoBehaviour {
     void Start () {
         damagesc = new GameObject[Objects.Length];
         
+        /*
         foreach (GameObject obj in UnityEngine.Object.FindObjectsOfType(typeof(GameObject)))
         {
             // シーン上に存在するオブジェクトならば処理.
@@ -45,7 +46,7 @@ public class Sample : MonoBehaviour {
                 // GameObjectの名前を表示.
                 Debug.Log(obj.name);
             }
-        }
+        }*/
 
         for(int i = 0;i < Objects.Length; i++)
         {
@@ -85,29 +86,6 @@ public class Sample : MonoBehaviour {
 
         }
 
-        for(int i = 0; i < NotRegistedObject.Length; i++)
-        {
-            ray = new Ray(camerarig.transform.position, NotRegistedObject[i].transform.TransformPoint(damagesc[i].transform.localPosition)- camerarig.transform.position);
-            if (Physics.Raycast(ray, out hit, lightdistance) && (Vector3.Dot(camerarig.transform.forward.normalized, ray.direction.normalized) > 0.94f))
-            {
-               // Debug.Log("Find");
-
-                //damagesc[i].GetComponent<Escape>().damage = true;
-                if (hit.transform.tag == NotRegistedObject[i].transform.tag)
-                {
-                    damagesc[i].GetComponent<Escape>().damage = true;
-                    Debug.Log("trueFind");
-                }
-               /*lse
-                {
-                    damagesc[i].GetComponent<Escape>().damage = false;
-                }*/
-            }
-            else
-            {
-                damagesc[i].GetComponent<Escape>().damage = false;
-            }
-
             
 
         }
@@ -115,4 +93,4 @@ public class Sample : MonoBehaviour {
 
         
 	}
-}
+

@@ -6,6 +6,8 @@ public class OpeningTutrial : MonoBehaviour {
 
     [SerializeField] Navi navi;
 
+    [SerializeField] GameObject Sun;
+
     [SerializeField] string[] OP01_Serif;
     [SerializeField] string[] OP02_Serif;
     [SerializeField] string[] OP03_Serif;
@@ -118,6 +120,7 @@ public class OpeningTutrial : MonoBehaviour {
 
         yield return new WaitForSeconds(0.5f);
 
+
         Debug.Log("操作方法：");
 
         yield break;
@@ -131,6 +134,8 @@ public class OpeningTutrial : MonoBehaviour {
 
     public IEnumerator OP03()
     {
+        
+        Sun.GetComponent<Animator>().SetTrigger("NoEffection");
         yield return new WaitForSeconds(0.1f);
 
         //DoorCloseSource.Play();

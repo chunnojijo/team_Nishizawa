@@ -71,10 +71,10 @@ public class LocalAvatorMove : MonoBehaviour {
 
     IEnumerator move()
     {
-        if (OVRInput.Get(OVRInput.RawButton.RIndexTrigger))
+        if (OVRInput.Get(OVRInput.RawButton.RHandTrigger))
         {
             //CC.Move(new Vector3((HMD.transform.forward * movespeed * Time.deltaTime).x, 0f, (HMD.transform.forward * movespeed * Time.deltaTime).z);
-            CC.Move(Vector3.ProjectOnPlane(HMD.transform.forward, Vector3.up).normalized * movespeed * Time.deltaTime);
+            CC.Move(new Vector3((HMD.transform.forward * movespeed * Time.deltaTime).x, 0, (HMD.transform.forward * movespeed * Time.deltaTime).z));
         }
         yield return new WaitForSeconds(0.7f);
     }

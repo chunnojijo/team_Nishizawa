@@ -50,6 +50,7 @@ public class ms_roomManegar : MonoBehaviour {
             {
                 StartCoroutine("hint_getkey");
                 flag3 = false;
+                finish = true;
             }
         }
     }
