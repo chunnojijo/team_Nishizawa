@@ -34,7 +34,7 @@ public class EndingTutrial : MonoBehaviour {
 
         if (SunRising)
         {
-            Duration += Time.deltaTime / 60f;
+            Duration += Time.deltaTime / 40f;
             if (Duration >= 1f)
             {
                 Duration = 1f;
@@ -98,6 +98,7 @@ public class EndingTutrial : MonoBehaviour {
         yield return new WaitForSeconds(2f);
 
         navi.Say(ED02_Serif[1]);
+        this.GetComponent<AudioSource>().Play();
 
         yield return new WaitForSeconds(3f);
 

@@ -98,7 +98,7 @@ public class OutSideSwich : MonoBehaviour {
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark, 0.5f);
         GrabRelease.ReleaseAllObjects();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         player.position = Inside_CamPos.position;
         player.rotation = Inside_CamPos.rotation;
@@ -124,7 +124,7 @@ public class OutSideSwich : MonoBehaviour {
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToDark, 0.5f);
         GrabRelease.ReleaseAllObjects();
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         navi.Shutup();
         ON_EndingMode.Invoke();

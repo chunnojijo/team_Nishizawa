@@ -43,7 +43,8 @@ public class Vanishing : MonoBehaviour {
     [Space(1)]
     [SerializeField] ParticleSystem DamageParticle;
     [SerializeField] Slider HPSlider;
-    AudioSource audio;
+    [SerializeField] AudioSource audio;
+    [SerializeField] AudioSource audio2;
     private OVRHapticsClip hapticsClip;
 
 
@@ -55,7 +56,6 @@ public class Vanishing : MonoBehaviour {
         Invoke("Can", 3f);
         DefRot = gameObject.transform.rotation;
         HPSlider.maxValue = HP;
-        audio = GetComponent<AudioSource>();
         byte[] samples = new byte[8]{128,128,128,128,128,128,128,128};
         hapticsClip = new OVRHapticsClip(samples, samples.Length);
 
@@ -173,6 +173,7 @@ public class Vanishing : MonoBehaviour {
         SmokeParticles.SetActive(true);
         endingTutrial.ED02_GetReady();
         audio.PlayDelayed(5.5f);
+        audio2.Play();
     }
 
     void Can()

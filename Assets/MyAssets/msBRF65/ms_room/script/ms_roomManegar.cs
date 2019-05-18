@@ -29,6 +29,7 @@ public class ms_roomManegar : MonoBehaviour {
         {
             if (navi_pos.GetComponent<start_navi>().collision && flag1)
             {
+                StopAllCoroutines();
                 StartCoroutine("first_serif");
                 flag1 = false;
             }
@@ -42,12 +43,14 @@ public class ms_roomManegar : MonoBehaviour {
             }
             if (escape1.dieatall && escape2.dieatall && flag2)
             {
+                StopAllCoroutines();
                 ms_light_plane.gameObject.SetActive(true);
                 StartCoroutine("hint");
                 flag2 = false;
             }
             if (ms_light.GetComponent<ms_LightController>().finish_color && flag3)
             {
+                StopAllCoroutines();
                 StartCoroutine("hint_getkey");
                 flag3 = false;
                 finish = true;
@@ -72,13 +75,15 @@ public class ms_roomManegar : MonoBehaviour {
         navi_s.GoTo(navi_pos1.transform.position);
         yield return new WaitForSeconds(3f);
         navi_s.Say("鍵を手に入れないと、出れないよ！");
+        yield return new WaitForSeconds(10f);
+        navi_s.Say("ここの白いスイッチは何だろう？？");
         yield return new WaitForSeconds(3f);
-        navi_s.Say("あそこにあるChargeの文字は何だろう？？");
+        navi_s.Say("光を当ててみたら何か起こるかも、、？",true);
         yield return new WaitForSeconds(3f);
     }
     IEnumerator hint_getkey()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(6f);
         navi_s.GoTo(navi_pos2.transform.position);
         yield return new WaitForSeconds(3f);
         navi_s.Say("鍵の影が出てきたね！");
