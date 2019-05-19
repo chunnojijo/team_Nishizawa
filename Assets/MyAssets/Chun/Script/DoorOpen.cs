@@ -53,8 +53,9 @@ public class DoorOpen : MonoBehaviour
     {
         if (other.tag == "Key")
         {
+            GrabRelease.ReleaseAllObjects();
             open = true;
-            other.GetComponent<MeshRenderer>().enabled = false;
+            other.gameObject.SetActive(false);
         }
     }
 }
