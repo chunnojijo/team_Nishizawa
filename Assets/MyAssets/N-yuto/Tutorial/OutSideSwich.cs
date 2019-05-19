@@ -44,6 +44,7 @@ public class OutSideSwich : MonoBehaviour {
         if (Input.GetKeyDown("o") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
             Opening_Invoke();
+
         }
         if (Input.GetKeyDown("i") && (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)))
         {
@@ -86,6 +87,7 @@ public class OutSideSwich : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
+        CCPC.Change();
 
         yield return new WaitForSeconds(1f);
 
@@ -116,6 +118,7 @@ public class OutSideSwich : MonoBehaviour {
         yield return new WaitForSeconds(1f);
 
         StartCoroutine(openingEvent.OP03());
+        CCPC.Change();
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
     }
 
@@ -139,8 +142,16 @@ public class OutSideSwich : MonoBehaviour {
         navi.transform.position = ED_NaviPos.position;
         navi.transform.rotation = ED_NaviPos.rotation;
 
+        yield return null;
+
+        //ここから
+
+
+        //ここまで
+
         yield return new WaitForSeconds(1f);
 
+        CCPC.Change();
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
 
         yield return new WaitForSeconds(1f);
@@ -170,6 +181,7 @@ public class OutSideSwich : MonoBehaviour {
 
         yield return new WaitForSeconds(1f);
 
+        CCPC.Change();
         DarknessCtrl.ChangeState(DarknessCtrl.State.ChangeToClear);
 
         yield return new WaitForSeconds(1f);

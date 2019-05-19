@@ -59,9 +59,10 @@ Properties {
 SubShader {
 	Tags 
 	{
-		"Queue"="Transparent + 10"
+		"Queue"="Overlay+1"
 		"IgnoreProjector"="True"
 		"RenderType"="Transparent"
+		"ZTest"="Always"
 	}
 
 
@@ -78,7 +79,7 @@ SubShader {
 	ZWrite Off
 	Lighting Off
 	Fog { Mode Off }
-	ZTest [unity_GUIZTestMode]
+	ZTest [Always]
 	Blend One OneMinusSrcAlpha
 	ColorMask [_ColorMask]
 

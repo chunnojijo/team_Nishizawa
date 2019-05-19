@@ -56,6 +56,13 @@ public class DoorOpen : MonoBehaviour
             GrabRelease.ReleaseAllObjects();
             open = true;
             other.gameObject.SetActive(false);
+            Invoke("D",2);
         }
+    }
+
+    private void D()
+    {
+        GetComponent<BoxCollider>().enabled = false;
+        this.enabled = false;
     }
 }

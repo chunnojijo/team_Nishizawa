@@ -33,8 +33,8 @@ public class CharaConPosChange : MonoBehaviour {
 	}
 
 	public void Change(){
-        Vector3 localPos = this.transform.InverseTransformPoint(HMD.transform.position);
-        //Debug.Log(localPos + "<-local world->" + HMD.transform.position);
-		CC.center = new Vector3(localPos.x,CC.center.y,localPos.z);
+        Vector3 ff = this.transform.InverseTransformPoint(HMD.transform.position);
+        Debug.LogWarning(ff + "<-local  CCPC   world->" + HMD.transform.position);
+		CC.center = new Vector3(ff.x,CC.center.y,ff.z);
 	}
 }

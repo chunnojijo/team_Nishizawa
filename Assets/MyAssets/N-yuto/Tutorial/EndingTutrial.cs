@@ -116,7 +116,7 @@ public class EndingTutrial : MonoBehaviour {
         navi.Say(ED02_Serif[3]);
 
         yield return new WaitForSeconds(3f);
-
+        navi.Comeback();
         navi.Say(ED02_Serif[4]);
 
         yield return new WaitForSeconds(3f);
